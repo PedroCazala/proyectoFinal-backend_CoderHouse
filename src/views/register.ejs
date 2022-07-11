@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+            crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <title>Register || Proyecto final</title>
+    <link
+     rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+   />
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+</head>
+<body>
+    <div class="allContainer">
+        <h1>Register</h1>
+        <form class="formsProfile" action="/register" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+              <label for="email" class="form-label">Ingresa tu email</label>
+              <input type="email" class="form-control" id="email" name="email">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password">
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Ingresa tu nombre</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Ingresa tu dirección</label>
+                <input type="text" class="form-control" id="address" name="address">
+            </div>
+            <div class="mb-3">
+                <label for="age" class="form-label">Ingresa tu edad</label>
+                <input type="number" class="form-control" id="age" name="age">
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Ingresa tu teléfono</label>
+                <input type="tel" class="form-control" id="phone" name="phone">
+            </div>
+            <div class="mb-3">
+                <label for="img" class="form-label">Ingresa una imagen para tu foto de perfil</label>
+                <input type="file" class="form-control" id="img" name="img">
+            </div>
+            <button type="submit" class="btn btn-dark">Submit</button>
+        </form>
+
+        <form action="/login" method="get">
+            <p>Ya tenes una cuenta:</p>
+            <button class="btn btn-dark" type="submit">Ir a iniciar sesión</button>
+        </form>
+        <br>
+        <form action="/" method="get">
+            <button class="btn btn-light" type="submit">Volver a la pagina principal</button>
+        </form>
+    </div>
+
+    <script>
+        const phoneInputField = document.querySelector("#phone");
+        const phoneInput = window.intlTelInput(phoneInputField, {
+          utilsScript:
+            "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        });
+      </script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"
+    ></script>
+</body>
+</html>
+
+<!-- Para el tema del número de telefono ver: https://www.twilio.com/blog/como-crear-entradas-internacionales-de-numeros-de-telefono-en-html-y-javascript -->
