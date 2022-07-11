@@ -1,9 +1,9 @@
 import express from 'express'
 import { allRoutes } from './src/routes/allRoutes.js'
 // import 'dotenv/config'
-import session  from 'express-session'
+// import session  from 'express-session'
 
-import passport from 'passport'
+// import passport from 'passport'
 
 export const app = express()
 const PORT = process.env.PORT || 8000
