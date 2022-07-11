@@ -1,9 +1,9 @@
 import express from 'express'
-import { allRoutes } from './src/routes/allRoutes.js'
-import 'dotenv/config'
-import session  from 'express-session'
+// import { allRoutes } from './src/routes/allRoutes.js'
+// import 'dotenv/config'
+// import session  from 'express-session'
 
-import passport from 'passport'
+// import passport from 'passport'
 
 export const app = express()
 const PORT = process.env.PORT || 8000
@@ -13,6 +13,7 @@ const server = app.listen(PORT,()=>{
     console.log(`🔥Escuchando en http://localhost:${PORT}`);
 })
 server.on('error', error  => console.log(`Error en el servidor ${error}`))
+
 app.get('/',(req,res)=>{
     res.send('prueba heroku')
 })
