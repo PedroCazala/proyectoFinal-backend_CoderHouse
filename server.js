@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 8000
 
 //Servidor en marcha
 const server = app.listen(PORT,()=>{
-    console.log(`🔥Escuchando en http://localhost:${server.address().port}`);
+    console.log(`🔥Escuchando en http://localhost:${PORT}`);
 })
 server.on('error', error  => console.log(`Error en el servidor ${error}`))
 app.get('/',(req,res)=>{
