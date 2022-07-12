@@ -1,6 +1,7 @@
 import { Router } from "express";
 import passport from "passport";
 import { upload } from "../container/daos/user/avatarUpload.js";
+import { sendEmailToAdmin } from "../messages/nodemailer.js";
 
 const userProfile = Router()
 
@@ -30,9 +31,14 @@ userProfile.get('/profile', (req, res) => {
     const user = req.user || 'No hay ninguna sesión de usuario activa'
     res.send(user)
 })
+
 userProfile.get('/infoUser',(req,res) =>{
     const user = req.user || {data:'proximamente será info de usuario'}
     res.send(user)
+})
+userProfile.get('/pruebaNodemailer',(req,res) =>{
+    sendEmailToAdmin().catch(console.error);
+    res.send('Mail send ok')
 })
 
 export {userProfile}

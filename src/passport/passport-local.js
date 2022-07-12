@@ -4,6 +4,7 @@ import { upload } from "../container/daos/user/avatarUpload.js";
 // import { UserDaoMongoDB } from "../container/daos/user/UserDaoMongoDB.js";
 import { User } from '../container/daos/user/userModel.js'
 import { connectMongoDB } from "../container/MongoDbContainer.js";
+import { sendEmailToAdmin } from "../messages/nodemailer.js";
 import { twilioSend } from "../messages/twilio.js";
 
 connectMongoDB()
@@ -45,7 +46,8 @@ passport.use(
                 newUser.email = email;
                 newUser.password = newUser.encryptPassword(password);
                 await newUser.save();
-                twilioSend.sendWhatsappToAdmin(`El usuario ${name}, se registro con el email: ${email},${newUser}`)
+                sendEmailToAdmin(newUser)
+                // twilioSend.sendWhatsappToAdmin(`El usuario ${name}, se registro con el email: ${email},${newUser}`)
                 done(null, newUser);
             }
         }
