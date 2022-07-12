@@ -1,9 +1,9 @@
 import express from 'express'
 import { allRoutes } from './src/routes/allRoutes.js'
-// import 'dotenv/config'
-// import session  from 'express-session'
+import 'dotenv/config'
+import session  from 'express-session'
 
-// import passport from 'passport'
+import passport from 'passport'
 
 export const app = express()
 const PORT = process.env.PORT || 8000
@@ -14,9 +14,9 @@ const server = app.listen(PORT,()=>{
 })
 server.on('error', error  => console.log(`Error en el servidor ${error}`))
 
-// app.get('/',(req,res)=>{
-//     res.send('prueba heroku')
-// })
+app.get('/',(req,res)=>{
+    res.send('prueba heroku')
+})
 
 //poder enviar json
 app.use(express.json())
@@ -24,8 +24,6 @@ app.use(express.urlencoded({extended:true}))
 
 // -------- ACCESO A ARCHIVOS PUBLICOS -------
 app.use(express.static('public'))
-
-
 
 // -------- VISTAS CON EJS -------
 app.set('view engine','ejs')
