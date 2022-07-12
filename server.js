@@ -14,10 +14,6 @@ const server = app.listen(PORT,()=>{
 })
 server.on('error', error  => console.log(`Error en el servidor ${error}`))
 
-app.get('/',(req,res)=>{
-    res.send('prueba heroku')
-})
-
 //poder enviar json
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
