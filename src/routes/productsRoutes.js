@@ -1,18 +1,18 @@
 import express from 'express'
 import { adminPermission } from '../middlewares.js'
 
-// //Mongo
-// import ProductsDaoMongoDB from '../container/daos/productos/ProductsDaoMongoDB.js'
-// const Products = ProductsDaoMongoDB
+//Mongo
+import ProductsDaoMongoDB from '../container/daos/productos/ProductsDaoMongoDB.js'
+const Products = ProductsDaoMongoDB
 // //Memory
 // import ProductsDaoMemory from '../container/daos/productos/ProductsDaoMemory.js'
 // const Products = ProductsDaoMemory
 // //FileSystem
 // import ProductsDaoFileSystem from '../container/daos/productos/ProductsDaoFileSystem.js'
 // const Products = ProductsDaoFileSystem
-//FileSystem
-import ProductsDaoFirebase from '../container/daos/productos/ProductsDaoFirebase.js' 
-const Products = ProductsDaoFirebase
+// //FileSystem
+// import ProductsDaoFirebase from '../container/daos/productos/ProductsDaoFirebase.js' 
+// const Products = ProductsDaoFirebase
 
 const {Router} = express
 const productsRouter = Router()
