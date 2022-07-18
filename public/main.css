@@ -72,3 +72,12 @@ h1{
 .iti__country-list > li{
     color: rgb(46, 45, 45);
 }
+.card{
+    color: black;
+}
+.products{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    gap: 10px;
+}
