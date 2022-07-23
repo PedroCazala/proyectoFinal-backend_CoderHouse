@@ -1,4 +1,5 @@
 import { newId } from '../../../funciones.js'
+import { logger } from '../../../logs/log4js.js'
 import { FileSystemContainer,Carts,Products} from '../../FileSystemContainer.js'
 class CartsDaoMemory extends FileSystemContainer{
     //crear carrito y devolver su id
@@ -12,8 +13,8 @@ class CartsDaoMemory extends FileSystemContainer{
             super.updateCartsFile()
             res.send(`Carrito creado ${JSON.stringify(cart)}`)
         } catch (error) {
-            console.log(`Entró al catch create cart`);
-            console.log(error.message);
+            logger.error(`Entró al catch create cart`);
+            logger.error(error.message);
         }
     }
     //Eliminar un carrito
@@ -31,8 +32,8 @@ class CartsDaoMemory extends FileSystemContainer{
                 res.send(`No existía ningún carrito con el id: ${id}`)
             }
         } catch (error) {
-            console.log(`Entró al catch deleteOne cart`);
-            console.log(error.message);
+            logger.error(`Entró al catch deleteOne cart`);
+            logger.error(error.message);
         }
     } 
     //Ver los productos listados en el carrito
@@ -48,8 +49,8 @@ class CartsDaoMemory extends FileSystemContainer{
                 res.send(`El carrito con el id número: ${id}, no existe`)
             }
         } catch (error) {
-            console.log(`Entró al catch getProduct cart`);
-            console.log(error.message);
+            logger.error(`Entró al catch getProduct cart`);
+            logger.error(error.message);
         }
     }
     // Agregar determinado producto a determinado carrito
@@ -77,8 +78,8 @@ class CartsDaoMemory extends FileSystemContainer{
                 }
             }
         } catch (error) {
-            console.log(`Entró al catch addProduct cart`);
-            console.log(error.message);
+            logger.error(`Entró al catch addProduct cart`);
+            logger.error(error.message);
         }
     }
     static deleteAProduct(req,res){
@@ -101,8 +102,8 @@ class CartsDaoMemory extends FileSystemContainer{
             }
         }
         catch (error){
-            console.log(`Entró al catch deleteAProduct cart`);
-            console.log(error.message);
+            logger.error(`Entró al catch deleteAProduct cart`);
+            logger.error(error.message);
         }
     }
 }

@@ -1,3 +1,4 @@
+import { logger } from '../../../logs/log4js.js';
 import { FirebaseContainer } from '../../FirebaseContainer.js';
 import {productsRef,cartsRef,FieldValue} from '../firebaseConfing/confing.js'
 class CartsDaoFirebase extends FirebaseContainer{
@@ -10,8 +11,8 @@ class CartsDaoFirebase extends FirebaseContainer{
 
             res.send(firebaseCart)
         } catch (error) {
-            console.log(`Entró al catch create cart`);
-            console.log(error.message);
+            logger.error(`Entró al catch create cart`);
+            logger.error(error.message);
         }
     }
     //Eliminar un carrito
@@ -26,8 +27,8 @@ class CartsDaoFirebase extends FirebaseContainer{
                 res.send({mensaje:`No se puede borrar carrito con id: ${id}, porque no existe`})
             }
         } catch (error) {
-            console.log(`Entró al catch deleteOne cart`);
-            console.log(error.message);
+            logger.error(`Entró al catch deleteOne cart`);
+            logger.error(error.message);
         }
     } 
     //Ver los productos listados en el carrito
@@ -40,11 +41,11 @@ class CartsDaoFirebase extends FirebaseContainer{
                 res.send(products)
             }catch(err){
                 res.send(`El carrito con el id número: ${id}, no existe`)
-                console.log(err.message);
+                logger.error(err.message);
             }
         } catch (error) {
-            console.log(`Entró al catch getProduct cart`);
-            console.log(error.message);
+            logger.error(`Entró al catch getProduct cart`);
+            logger.error(error.message);
         }
     }
     static async addProduct(req,res){
@@ -84,8 +85,8 @@ class CartsDaoFirebase extends FirebaseContainer{
                 }
             }
         } catch (error) {
-            console.log(`Entró al catch addProduct cart`);
-            console.log(error.message);
+            logger.error(`Entró al catch addProduct cart`);
+            logger.error(error.message);
         }
     }
     // static async deleteAProduct(req,res){
@@ -100,8 +101,8 @@ class CartsDaoFirebase extends FirebaseContainer{
     //         res.send({
     //             error1:`El carrito con el id número: ${idCart}, no existe o producto con el id número: ${idProduct}, no existe en dicho carrito`
     //         })
-    //         console.log(`Entró al catch deleteAProduct cart`);
-    //         console.log(error.message);
+    //         logger.error(`Entró al catch deleteAProduct cart`);
+    //         logger.error(error.message);
     //     }
     // }
 }

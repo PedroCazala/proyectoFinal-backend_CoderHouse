@@ -1,3 +1,4 @@
+import { logger } from '../../../logs/log4js.js'
 import {MongoDbContainer, connectMongoDB } from '../../MongoDbContainer.js'
 import { Product } from '../productos/models/products.js'
 import { Carts } from './models/carts.js'
@@ -14,8 +15,8 @@ class CartsDaoMongoDB extends MongoDbContainer{
             // res.send(mongoCart._id)
             res.send(mongoCart[0]._id)
         } catch (error) {
-            console.log(`Entró al catch create cart`);
-            console.log(error.message);
+            logger.error(`Entró al catch create cart`);
+            logger.error(error.message);
         }
     }
     //Eliminar un carrito
@@ -30,8 +31,8 @@ class CartsDaoMongoDB extends MongoDbContainer{
             :
                 res.send({mensaje:`No se puede borrar carrito con id: ${id}, porque no existe`})
         } catch (error) {
-            console.log(`Entró al catch deleteOne cart`);
-            console.log(error.message);
+            logger.error(`Entró al catch deleteOne cart`);
+            logger.error(error.message);
         }
     } 
     //Ver los productos listados en el carrito
@@ -48,8 +49,8 @@ class CartsDaoMongoDB extends MongoDbContainer{
                 res.send(cart.products)
             }
         } catch (error) {
-            console.log(`Entró al catch getProduct cart`);
-            console.log(error.message);
+            logger.error(`Entró al catch getProduct cart`);
+            logger.error(error.message);
         }
     }
     static async addProduct(req,res){
@@ -84,8 +85,8 @@ class CartsDaoMongoDB extends MongoDbContainer{
                 }
             }
         } catch (error) {
-            console.log(`Entró al catch addProduct cart`);
-            console.log(error.message);
+            logger.error(`Entró al catch addProduct cart`);
+            logger.error(error.message);
         }
     }
     static async deleteAProduct(req,res){
@@ -100,8 +101,8 @@ class CartsDaoMongoDB extends MongoDbContainer{
             res.send({
                 error1:`El carrito con el id número: ${idCart}, no existe o producto con el id número: ${idProduct}, no existe en dicho carrito`
             })
-            console.log(`Entró al catch deleteAProduct cart`);
-            console.log(error.message);
+            logger.error(`Entró al catch deleteAProduct cart`);
+            logger.error(error.message);
         }
     }
 }

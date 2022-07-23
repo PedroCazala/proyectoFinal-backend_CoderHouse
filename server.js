@@ -1,5 +1,6 @@
 import express from 'express'
 import { allRoutes } from './src/routes/allRoutes.js'
+import { logger, loggerFile } from './src/logs/log4js.js'
 import 'dotenv/config'
 import session  from 'express-session'
 
@@ -10,9 +11,9 @@ const PORT = process.env.PORT || 8000
 
 //Servidor en marcha
 const server = app.listen(PORT,()=>{
-    console.log(`🔥Escuchando en http://localhost:${PORT}`);
+    logger.info(`🔥Escuchando en http://localhost:${PORT}`);
 })
-server.on('error', error  => console.log(`Error en el servidor ${error}`))
+server.on('error', error  => logger.error(`Error en el servidor ${error}`))
 
 //poder enviar json
 app.use(express.json())

@@ -1,3 +1,4 @@
+import { logger } from '../../../logs/log4js.js';
 import {MongoDbContainer, connectMongoDB } from '../../MongoDbContainer.js'
 import { Product } from './models/products.js'
 class ProductsDaoMongoDB extends MongoDbContainer{
@@ -10,7 +11,7 @@ class ProductsDaoMongoDB extends MongoDbContainer{
             try {
                 finded = await Product.findOne({_id:id})
             } catch (error) {
-                console.log(error.message);
+                logger.info(error.message);
             } 
             finded ?
                 res.send(finded)
@@ -30,8 +31,8 @@ class ProductsDaoMongoDB extends MongoDbContainer{
 
             res.send({newProduct})
         } catch (error) {
-            console.log('entro al catch');
-            console.log(error.message);
+            logger.info('entro al catch');
+            logger.info(error.message);
         }
     }
 
@@ -49,8 +50,8 @@ class ProductsDaoMongoDB extends MongoDbContainer{
             }
 
         } catch (error) {
-            console.log('entro al catch "updateProduct"');
-            console.log(error.message);
+            logger.info('entro al catch "updateProduct"');
+            logger.info(error.message);
         }
     }
     static async delateProduct(req,res){
@@ -64,8 +65,8 @@ class ProductsDaoMongoDB extends MongoDbContainer{
                 res.send(`No existe ningún porducto con el id: ${id}`)
             }
         } catch (error) {
-            console.log('entro al catch "deleteProduct"');
-            console.log(error.message);
+            logger.info('entro al catch "deleteProduct"');
+            logger.info(error.message);
         }
     }
 }

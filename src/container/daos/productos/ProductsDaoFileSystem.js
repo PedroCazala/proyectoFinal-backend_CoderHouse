@@ -1,4 +1,5 @@
 import { newId } from "../../../funciones.js";
+import { logger } from "../../../logs/log4js.js";
 import { FileSystemContainer, Products } from "../../FileSystemContainer.js";
 class ProductsDaoFileSystem extends FileSystemContainer{
     //Si id existe, el producto con dicho id se mostrará, sino se mostraran todos
@@ -32,8 +33,8 @@ class ProductsDaoFileSystem extends FileSystemContainer{
             super.updateProductsFile()
             res.send({addProduct})
         } catch (error) {
-            console.log('entro al catch pushProduct FileSystem');
-            console.log(error.message);
+            logger.info('entro al catch pushProduct FileSystem');
+            logger.error(error.message);
         }
     }
 
@@ -55,8 +56,8 @@ class ProductsDaoFileSystem extends FileSystemContainer{
             }
 
         } catch (error) {
-            console.log('entro al catch "updateProduct"');
-            console.log(error.message);
+            logger.info('entro al catch "updateProduct"');
+            logger.error(error.message);
         }
     }
     static async delateProduct(req,res){
@@ -73,8 +74,8 @@ class ProductsDaoFileSystem extends FileSystemContainer{
                 res.send(`No existe ningún porducto con el id: ${id}`)
             }
         } catch (error) {
-            console.log('entro al catch "deleteProduct"');
-            console.log(error.message);
+            logger.info('entro al catch "deleteProduct"');
+            logger.error(error.message);
         }
     }
 }

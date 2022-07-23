@@ -1,4 +1,5 @@
 import fs  from 'fs'
+import { logger } from '../logs/log4js'
 let Products =[]
 const fileProducts = 'productos.txt'
 let Carts =[]
@@ -11,7 +12,7 @@ class FileSystemContainer{
             Products = JSON.parse(archivo)
         }catch{
             fs.writeFileSync(fileProducts,'[]')
-            console.log('entro al catch y borro')
+            logger.info('entro al catch y borro')
         }
     }
     // PRODUCTOS - Actualizar
@@ -26,7 +27,7 @@ class FileSystemContainer{
             Carts = JSON.parse(archivo)
         }catch{
             fs.writeFileSync(fileCarts,'[]')
-            console.log('entro al catch y borro CARRITO')
+            logger.info('entro al catch y borro CARRITO')
         }
     }
     //CARRITOS - Actualizar
@@ -40,7 +41,7 @@ class FileSystemContainer{
     //         products = JSON.parse(archivo)
     //     }catch{
     //         fs.writeFileSync(fileProducts,'[]')
-    //         console.log('entro al catch y borro')
+    //         logger.info('entro al catch y borro')
     //     }
     // }
 }

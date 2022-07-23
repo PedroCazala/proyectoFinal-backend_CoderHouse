@@ -4,6 +4,7 @@ import { upload } from "../container/daos/user/avatarUpload.js";
 // import { UserDaoMongoDB } from "../container/daos/user/UserDaoMongoDB.js";
 import { User } from '../container/daos/user/userModel.js'
 import { connectMongoDB } from "../container/MongoDbContainer.js";
+import { logger } from "../logs/log4js.js";
 import { sendEmailToAdmin } from "../messages/nodemailer.js";
 import { twilioSend } from "../messages/twilio.js";
 
@@ -32,7 +33,7 @@ passport.use(
         async (req, email, password, done) => {
             const user = await User.findOne({email:email})
             if(user){
-                console.log(`El usuario con el email ${email}, ya existe`);
+                logger.warn(`El usuario con el email ${email}, ya existe`);
                 done(null,false)
             }else{
                 const newUser = await new User();
@@ -64,11 +65,11 @@ passport.use(
             const user = await User.findOne({email:email})
             if (!user) {
                 const messageSingInError =`El usuario no existe, ...ver como enviar una respuesta`
-                console.log(messageSingInError);
+                logger.warn(messageSingInError);
                 done(null,false)
             }else if(!user.comparePassword(password)){
                 const messageSingInError =`La contraseña es incorrecta, ...ver como enviar una respuesta`
-                console.log(messageSingInError,user.password,password);
+                logger.warn(messageSingInError,user.password,password);
                 done(null,false)
             }else{
                 done(null,user)

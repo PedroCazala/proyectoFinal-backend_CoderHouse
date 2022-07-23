@@ -1,4 +1,5 @@
 import { newId } from "../../../funciones.js";
+import { logger } from "../../../logs/log4js.js";
 import { MemoryContainer, Products} from "../../MemoryContainer.js";
 
 class ProductsDaoMemory extends MemoryContainer{
@@ -30,8 +31,8 @@ class ProductsDaoMemory extends MemoryContainer{
             Products.push(addProduct)
             res.send({addProduct})
         } catch (error) {
-            console.log('entro al catch pushProduct Memory');
-            console.log(error.message);
+            logger.info('entro al catch pushProduct Memory');
+            logger.error(error.message);
         }
     }
 
@@ -42,7 +43,7 @@ class ProductsDaoMemory extends MemoryContainer{
             const oldProduct = Products.find(prod=>prod.id ==id)
             const newProduct = {id,date,...req.body}
             const index = Products.indexOf(oldProduct)
-            console.log(`INDEX: ${index}`);
+            logger.info(`INDEX: ${index}`);
             Products[index]=newProduct
             oldProduct?
                 res.send(`oldProduct:${JSON.stringify(oldProduct)}, update:${JSON.stringify(newProduct)}`)
@@ -50,8 +51,8 @@ class ProductsDaoMemory extends MemoryContainer{
                 res.send(`No existe ningún porducto con el id: ${id}`)
 
         } catch (error) {
-            console.log('entro al catch "updateProduct"');
-            console.log(error.message);
+            logger.info('entro al catch "updateProduct"');
+            logger.error(error.message);
         }
     }
     static async delateProduct(req,res){
@@ -65,8 +66,8 @@ class ProductsDaoMemory extends MemoryContainer{
             :
                 res.send(`No existe ningún porducto con el id: ${id}`)
         } catch (error) {
-            console.log('entro al catch "deleteProduct"');
-            console.log(error.message);
+            logger.info('entro al catch "deleteProduct"');
+            logger.error(error.message);
         }
     }
 }

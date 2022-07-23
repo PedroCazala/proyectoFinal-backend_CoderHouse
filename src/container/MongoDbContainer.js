@@ -1,4 +1,5 @@
 import mongoose  from 'mongoose'
+import { logger } from '../logs/log4js';
 
 export class MongoDbContainer{
 }
@@ -8,8 +9,8 @@ export function connectMongoDB(){
         mongoose.connect(`mongodb+srv://pedro:${process.env.MONGO_PASSWORD}@cluster0.tugf9.mongodb.net/proyectoFinal?retryWrites=true&w=majority` /* || `mongodb://localhost:27017/proyectoFinal` */, {
             useNewUrlParser: true,
             useUnifiedTopology: true
-        },()=> console.log("Conectado a MongoDB"));
+        },()=> logger.info("Conectado a MongoDB"));
     } catch (error) {
-        console.log(error);
+        logger.info(error);
     }
 }

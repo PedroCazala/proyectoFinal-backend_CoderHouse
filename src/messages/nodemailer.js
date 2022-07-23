@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer'
+import { logger } from '../logs/log4js';
 
 export async function sendEmailToAdmin(usuario) {
     const transporter = nodemailer.createTransport({
@@ -21,10 +22,10 @@ export async function sendEmailToAdmin(usuario) {
     }
     try {
         let info = await transporter.sendMail(mailOption)
-        console.log(info);
-        console.log("Message sent: %s", info.messageId);
-        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+        logger.info(info);
+        logger.info("Message sent: %s", info.messageId);
+        logger.info("Preview URL: %s", nodemailer.getTestMessageUrl(info));
     } catch (error) {
-        console.log(error);
+        logger.info(error);
     }
 }
