@@ -1,5 +1,5 @@
 import fs  from 'fs'
-import { logger } from '../logs/log4js'
+import { logger } from '../logs/log4js.js'
 let Products =[]
 const fileProducts = 'productos.txt'
 let Carts =[]

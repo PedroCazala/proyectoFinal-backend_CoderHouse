@@ -16,6 +16,11 @@
 </head>
 <body>
     <div class="allContainer">
+        <%if ( !carrito  ){%>
+            <form action="/api/carrito" method="post">
+                <button type="submit" class="btn btn-primary" value=<%- product._id%> name="id">Crear carrito</button>
+            </form>
+        <% } %>
         <h1>Productos</h1>
         <div class="products">
             <% products.forEach(product => { %>
@@ -23,27 +28,16 @@
                     <img src=<%- product.img %> class="card-img-top" alt=<%- product.name %>>
                     <div class="card-body">
                       <h5 class="card-title"><%- product.name %></h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                      <h6 class="card-title">$<%- product.price %></h6>
+                      <p class="card-text"><%- product.description%></p>
+                      <form action="/carrito/62dca8cbe7026830f0730853/productos" method="post">
+                          <button type="submit" class="btn btn-primary" value=<%- product._id%> name="id">Añadir al carrito</button>
+                      </form>
                     </div>
                 </div>
             <% }) %>
         </div>
-        <form class="formsProfile" action="/login" method="post">
-            <div class="mb-3">
-              <label for="email" class="form-label">Ingresa tu email</label>
-              <input type="email" class="form-control" id="email" name="email">
-            </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" name="password">
-            </div>
-            <button type="submit" class="btn btn-dark">Submit</button>
-        </form>
-        <form action="/register" method="get">
-            <p>Todavía no tenes una cuenta:</p>
-            <button class="btn btn-dark" type="submit">Ir a registrarse</button>
-        </form>
+
         <form action="/" method="get">
             <button class="btn btn-light" type="submit">Volver a la pagina principal</button>
         </form>

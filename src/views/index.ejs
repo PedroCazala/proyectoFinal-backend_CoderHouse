@@ -25,13 +25,15 @@
             <%- include('./partials/navbar'); %>
         <% } %>
 
-        <select class="form-select storageMenu" aria-label="Default select example">
-            <option selected>Base de datos a utilizar, Todavía no funciona</option>
-            <option value="memoria">Memoria</option>
-            <option value="archivo">Archivo</option>
-            <option value="firebase">Firebase</option>
-            <option value="mongoDB">MongoDB</option>
-        </select>
+        <form action="/eleccionDeAlmacenamiento" method="post" id="formSelectStorage">
+            <select class="form-select storageMenu" aria-label="Default select example" id="selectStorage" name="selectStorage">
+                <option undefined>Base de datos a utilizar, Todavía no funciona</option>
+                <option value="memory">Memoria</option>
+                <option value="fileSystem">Archivo</option>
+                <option value="firebase">Firebase</option>
+                <option value="mongo">MongoDB</option>
+            </select>
+        </form>
         <div class="profileButtons">
             <form action="/login" method="get">
                 <p>Ya tenes una cuenta:</p>
@@ -48,5 +50,6 @@
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"
     ></script>
+    <script src="/selectStorageClient.js"></script>
 </body>
 </html>

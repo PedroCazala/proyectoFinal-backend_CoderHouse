@@ -1,5 +1,5 @@
 import twilio from 'twilio'
-import { logger } from '../logs/log4js';
+import { logger } from '../logs/log4js.js';
 export class twilioSend{
     static sendWhatsappToAdmin(messageBody){
         const accountSid = 'AC37d79788c122b2c5e991017acfee0911'; 

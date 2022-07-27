@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer'
-import { logger } from '../logs/log4js';
+import { logger } from '../logs/log4js.js';
 
 export async function sendEmailToAdmin(usuario) {
     const transporter = nodemailer.createTransport({

@@ -14,7 +14,8 @@ ecommerceRoutes.get('/productos', async (req, res) => {
 //   .then(data => console.log(data));
     // console.log(products);
     // res.send(products)
-    res.render('products',{products})
+    const carrito = false//'lala'
+    res.render('products',{products,carrito})
 })
 // ecommerceRoutes.get('/', async (req, res) => {
 //     res.redirect('http://localhost:8080/api/productos')

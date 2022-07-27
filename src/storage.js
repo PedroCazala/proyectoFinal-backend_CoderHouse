@@ -1,4 +1,4 @@
-import { logger } from "./logs/log4js";
+import { logger } from "./logs/log4js.js";
 
 
 // const storage = fileSystem
