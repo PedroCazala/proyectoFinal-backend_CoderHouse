@@ -1,8 +1,9 @@
 ./db
-backend-clase20-firebase-adminsdk-w6327-430fb97d48.json
+firebasekery.json
 firebase-key.json
 .env
 public/uploads/*
 !public/uploads/.gitkeep
 node_modules
 dist
+firebaseKey.json

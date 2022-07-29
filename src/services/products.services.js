@@ -1,12 +1,14 @@
 //TODO: Aca es donde se pondrá la lógica para que elija la base de datos
 import { ProductsDaoFileSystem } from "../DAO/fileSystem/products.dao.fileSystem.js";
+import { ProductsDaoFirebase } from "../DAO/Firebase/products.dao.firebase.js";
 import { ProductsDaoMemory } from "../DAO/Memory/products.dao.memory.js";
 import { ProductsDaoMongo } from "../DAO/mongoDb/products.dao.mongo.js"
 import { logger } from "../logs/log4js.js";
 
 // const DAO = ProductsDaoMongo
 // const DAO = ProductsDaoMemory
-const DAO = ProductsDaoFileSystem
+// const DAO = ProductsDaoFileSystem
+const DAO = ProductsDaoFirebase
 
 export class ProductsService {
     static async getAllProducts(){

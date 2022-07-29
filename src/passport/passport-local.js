@@ -3,7 +3,7 @@ import { Strategy } from "passport-local";
 import { upload } from "../container/daos/user/avatarUpload.js";
 // import { UserDaoMongoDB } from "../container/daos/user/UserDaoMongoDB.js";
 import { User } from '../container/daos/user/userModel.js'
-import { connectMongoDB } from "../container/MongoDbContainer.js";
+import { connectMongoDB } from "../db/connectMongoDB.js";
 import { logger } from "../logs/log4js.js";
 import { sendEmailToAdmin } from "../messages/nodemailer.js";
 import { twilioSend } from "../messages/twilio.js";

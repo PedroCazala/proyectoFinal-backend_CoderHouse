@@ -1,5 +1,6 @@
+import { connectMongoDB } from '../../../db/connectMongoDB.js'
 import { logger } from '../../../logs/log4js.js'
-import {MongoDbContainer, connectMongoDB } from '../../MongoDbContainer.js'
+import {MongoDbContainer} from '../../MongoDbContainer.js'
 import { Product } from '../productos/models/products.js'
 import { Carts } from './models/carts.js'
 class CartsDaoMongoDB extends MongoDbContainer{
