@@ -57,10 +57,8 @@ class ProductsDaoMemory extends MemoryContainer{
     }
     static async delateProduct(req,res){
         try {
-            const id = req.params.id 
-            const product = Products.find(prod=>prod.id ==id)
-            const index=Products.indexOf(product)
-            Products.splice(index,1)
+            
+            
             product ?
                 res.send(`Se borró el siguente producto: ${JSON.stringify(product)}`)
             :

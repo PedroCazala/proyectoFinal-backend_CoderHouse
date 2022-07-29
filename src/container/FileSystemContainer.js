@@ -10,6 +10,7 @@ class FileSystemContainer{
         try{
             let archivo = fs.readFileSync(fileProducts, 'utf-8');
             Products = JSON.parse(archivo)
+            return Products
         }catch{
             fs.writeFileSync(fileProducts,'[]')
             logger.info('entro al catch y borro')

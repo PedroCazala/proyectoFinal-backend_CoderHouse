@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const productsCollection = 'Productoss';
+const productsCollection = 'Productos';
 
 const productsSchema = new mongoose.Schema({
     name:{type:String,required:true,max:100},
@@ -11,4 +11,4 @@ const productsSchema = new mongoose.Schema({
     stock:{type:Number,required:true,max:100},
     date:{type:Number,required:true}
 })
-export const Product = mongoose.model(productsCollection,productsSchema) 
+export const ProductModel = mongoose.model(productsCollection,productsSchema) 

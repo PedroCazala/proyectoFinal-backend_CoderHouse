@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { cartRouter } from "./cartRoutes.js";
+import { cartRouter } from "./cart.routes.js";
 import { ecommerceRoutes } from "./frontEcomerceRoutes.js";
-import { productsRouter } from "./productsRoutes.js";
+import { productsRouter } from "./products.routes.js";
 import { StorageRoutes } from "./storage.routes.js";
 import { userProfile } from "./userProfileRoutes.js";
 

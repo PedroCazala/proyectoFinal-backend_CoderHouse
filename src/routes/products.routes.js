@@ -1,9 +1,12 @@
 import express from 'express'
 import { adminPermission } from '../middlewares.js'
 
-//Mongo
-import ProductsDaoMongoDB from '../container/daos/productos/ProductsDaoMongoDB.js'
-const Products = ProductsDaoMongoDB
+//Controller
+import {ProductsController} from '../controllers/product.controller.js'
+const Products = ProductsController
+// //Mongo
+// import ProductsDaoMongoDB from '../container/daos/productos/ProductsDaoMongoDB.js'
+// const Products = ProductsDaoMongoDB
 // //Memory
 // import ProductsDaoMemory from '../container/daos/productos/ProductsDaoMemory.js'
 // const Products = ProductsDaoMemory
