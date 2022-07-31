@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { ProductsFactory } from "../factory/products.factory.js";
 import { cartRouter } from "./cart.routes.js";
 import { ecommerceRoutes } from "./frontEcomerceRoutes.js";
 import { productsRouter } from "./products.routes.js";

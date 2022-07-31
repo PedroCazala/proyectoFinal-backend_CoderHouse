@@ -2,18 +2,13 @@ import { CartsDaoFileSystem } from "../DAO/fileSystem/carts.dao.fileSystem.js";
 import { CartsDaoFirebase } from "../DAO/Firebase/carts.dao.firebase.js";
 import { CartsDaoMemory } from "../DAO/Memory/cart.dao.memory.js";
 import { CartsDaoMongo } from "../DAO/mongoDb/cart.dao.mongo.js";
+import { SelectStorage } from "./selectStorage.js";
 
-export class CartsFactory{
-    constructor (storage) {
-        this.persistencia = storage;
-    }
-    storage(persistencia){
-        this.persistencia = persistencia.toLowerCase()
-    }
+export class CartsFactory extends SelectStorage{
     useStorage(){
-        console.log(this.persistencia);
+        console.log(super.persistencia);
 
-        switch (this.persistencia) {
+        switch (super.persistencia) {
             case 'mongo':
                 console.log('El almacenamiento se hará en: mongo');
                 return CartsDaoMongo()
