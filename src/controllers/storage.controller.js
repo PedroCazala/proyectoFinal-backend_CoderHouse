@@ -1,8 +1,6 @@
-import { SelectStorageService } from "../services/selectStorage.js"
+import { SelectStorageService } from "../factory/selectStorage.js"
 
 export const storageController =(storage)=>{
-    const almacenamiento = new SelectStorageService()
-    almacenamiento.storage(storage)
-    almacenamiento.useStorage()
+    SelectStorageService().storage(storage)
     console.log(almacenamiento.carts)
 }

@@ -5,10 +5,10 @@ export class SelectStorageService{
         this.persistencia = storage;
         this.carts =[]
     }
-    storage(persistencia){
+    static storage(persistencia){
         this.persistencia = persistencia.toLowerCase()
     }
-    useStorage(){
+    static useStorage(){
         console.log(this.persistencia);
 
         switch (this.persistencia) {

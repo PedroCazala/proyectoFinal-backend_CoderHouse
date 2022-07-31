@@ -12,7 +12,7 @@ export class ProductsController {
                 res.send(`El producto con el id número: ${id}, no existe`)
             }
         }else{
-            // traera todos
+            // traerá todos
             const allProducts = await ProductsService.getAllProducts()
             if(allProducts) {
                 res.send(allProducts)

@@ -1,46 +1,63 @@
-import { CartService } from "../services/selectStorage"
+import { logger } from "../logs/log4js.js"
+import { CartsServices } from "../services/carts.services.js"
+
 
 export class CartController {
-    static createCart(req,res){
+    static create(req,res){
         try {
-            CartService.createCart()
+            CartsServices.create()
             res.send('carrito creado')
         } catch (error) {
             res.send(error.message)
         }
     }
     static delateCart(req,res){
-        const idCart = req.params.id
-        if(idCart){
+        const id = req.params.id
+        const cart = CartsServices.delateCart(id)
+        if(cart){
             //llama al servicio
+            res.send(`Se borró el carrito con el id: ${id}.`)
         }else{
             //avisa que el id no existe al usuario
+            res.send({mensaje:`No se puede borrar carrito con id: ${id}, porque no existe`})
         }
     }
-    static getProductsOfCart(req,res){
+    static async getProducts(req,res){
         const idCart = req.params.id
-        if(idCart){
-            //llama al servicio
-        }else{
-            //avisa que el id no existe al usuario
+        let productsOfCart;
+        try {
+            productsOfCart = await CartsServices.getProductsOfCart(idCart)
+        } catch (error) {
+            res.send(`El carrito con el id número: ${idCart}, no existe`)
+        }finally{
+            res.send(productsOfCart)
         }
     }
-    static addProductOfCart(req,res){
+    static async addProductToCart(req,res){
         const idCart = req.params.id
         const idProduct = req.body.id
-        if(idCart && idProduct){
-            //llama al servicio
-        }else{
-            //avisa que el id no existe al usuario
+
+        let productsOfCarts;
+        try {
+            productsOfCarts = await CartsServices.addProductToCart(idCart,idProduct)
+        } catch (error) {
+            logger.error(`Entró al catch addProduct cart`);
+            logger.error(error);
+        }finally{
+            res.send(`Se añadió el producto con id ${idProduct} al carrito con el id ${idCart}
+            ${productsOfCarts}`)
         }
     }
-    static deleteAProductsOfCart(req,res){
+    static async deleteAProducts(req,res){
         const idCart = req.params.id
         const idProduct = req.body.id
-        if(idCart && idProduct){
-            //llama al servicio
-        }else{
-            //avisa que el id no existe al usuario
+        try {
+            await CartsServices.deleteAProducts(idCart,idProduct)
+            res.send(`Se eliminó el producto con id ${idProduct} del carrito con el id ${idCart}`)
+        } catch (error) {
+            res.send(`El producto con id ${idProduct} o carrito con el id ${idCart}, no existen`)
+            logger.error(`Entró al catch deleteAProduct cart`);
+            logger.error(error.message);
         }
     }
 }

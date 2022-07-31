@@ -1,8 +1,10 @@
 import express from 'express'
 
-//Mongo
-import CartsDaoMongoDB from '../container/daos/carritos/CartsDaoMongoDB.js'
-const Carts = CartsDaoMongoDB
+//Controller
+import { CartController } from '../controllers/cart.controller.js'
+// //Mongo
+// import CartsDaoMongoDB from '../container/daos/carritos/CartsDaoMongoDB.js'
+// const Carts = CartsDaoMongoDB
 // //Memory
 // import CartsDaoMemory from '../container/daos/carritos/CartsDaoMemory.js' 
 // const Carts = CartsDaoMemory
@@ -16,19 +18,19 @@ const {Router} = express
 const cartRouter = Router()
 
 cartRouter.post('/',(req,res)=>{
-    Carts.create(req,res)
+    CartController.create(req,res)
 })
 cartRouter.delete('/:id',(req,res)=>{
-    Carts.deleteOne(req,res)
+    CartController.delateCart(req,res)
 })
 cartRouter.get('/:id/productos',(req,res)=>{
-    Carts.getProducts(req,res)
+    CartController.getProducts(req,res)
 })
 cartRouter.post('/:id/productos',(req,res)=>{
-    Carts.addProduct(req,res)
+    CartController.addProductToCart(req,res)
 })
 cartRouter.delete('/:id/productos',(req,res)=>{
-    Carts.deleteAProduct(req,res)
+    CartController.deleteAProducts(req,res)
 })
 // //Crear carrito
 // cartRouter.post('/',(req,res)=>{

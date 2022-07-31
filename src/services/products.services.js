@@ -3,12 +3,16 @@ import { ProductsDaoFileSystem } from "../DAO/fileSystem/products.dao.fileSystem
 import { ProductsDaoFirebase } from "../DAO/Firebase/products.dao.firebase.js";
 import { ProductsDaoMemory } from "../DAO/Memory/products.dao.memory.js";
 import { ProductsDaoMongo } from "../DAO/mongoDb/products.dao.mongo.js"
+import { ProductsFactory } from "../factory/products.factory.js";
 import { logger } from "../logs/log4js.js";
 
 // const DAO = ProductsDaoMongo
-// const DAO = ProductsDaoMemory
+const DAO = ProductsDaoMemory
 // const DAO = ProductsDaoFileSystem
-const DAO = ProductsDaoFirebase
+// const DAO = ProductsDaoFirebase
+
+//La IDEA es usar este factory
+const Factory = new ProductsFactory()
 
 export class ProductsService {
     static async getAllProducts(){
@@ -47,10 +51,10 @@ export class ProductsService {
             logger.info('SERVICE UpdateProduct',error.message);
         } 
     }
-    static async delateProduct(id){
+    static async delateProduct(idCart,idProduct){
         try {
-            await DAO.delateProduct(id)
-            return true
+            const deleted = await DAO.delateProduct(idCart,idProduct)
+            return deleted
         } catch (error) {
             logger.info('SERVICE DeleteProduct',error.message);
         } 
