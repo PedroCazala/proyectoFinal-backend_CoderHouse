@@ -1,16 +1,8 @@
-import { CartsDaoMemory } from "../DAO/Memory/cart.dao.memory.js"
-import { CartsDaoMongo } from "../DAO/mongoDb/cart.dao.mongo.js"
 import { CartsFactory } from "../factory/carts .factory.js"
 import { logger } from "../logs/log4js.js"
 import { ProductsService } from "./products.services.js"
 
-// const DAO = CartsDaoMongo
-const DAO = CartsDaoMemory
-// const DAO = CartsDaoFileSystem
-// const DAO = CartsDaoFirebase
-
-//La IDEA es usar este factory
-const Factory = new CartsFactory()
+const Factory = CartsFactory.useStorage()
 
 
 export class CartsServices{
@@ -18,7 +10,7 @@ export class CartsServices{
         try {
             const date = Date.now() 
             const cart = {date,products:[]}
-            const carrito = await DAO.createCart(cart)
+            const carrito = await Factory.createCart(cart)
             return carrito
         } catch (error) {
             logger.error(`Entró al catch create cart`);
@@ -28,7 +20,7 @@ export class CartsServices{
     }
     static async delateCart(id){
         try {
-            const cart = await DAO.deleteCart(id)
+            const cart = await Factory.deleteCart(id)
             return cart
         } catch (error) {
             logger.error(`Entró al catch deleteOne cart`);
@@ -36,7 +28,7 @@ export class CartsServices{
         }
     }
     static async getACart(idCart){
-        const cart = await DAO.getACart(idCart)
+        const cart = await Factory.getACart(idCart)
         return cart
     }
     static async getProductsOfCart(idCart){
@@ -50,7 +42,7 @@ export class CartsServices{
         try {
             cart = await this.getACart(idCart)
             product = await ProductsService.getOneProductsById(idProduct)
-            await DAO.addProductToCart(product,idCart,cart)
+            await Factory.addProductToCart(product,idCart,cart)
         } catch {
             return{
                 error:`El carrito con el id número: ${idCart}, no existe, y/o el producto con el id número: ${idProduct}, no existe`
@@ -60,7 +52,7 @@ export class CartsServices{
     static async deleteAProducts(idCart,idProduct){
         try {
             const product = await ProductsService.getOneProductsById(idProduct)
-            const deleted = await DAO.deleteAProduct(idCart,idProduct,product)
+            const deleted = await Factory.deleteAProduct(idCart,idProduct,product)
             return deleted
         } catch (error) {
             logger.info('SERVICE DeleteProduct',error.message);

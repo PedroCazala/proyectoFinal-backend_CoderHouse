@@ -10,9 +10,10 @@ StorageRoutes.post('/eleccionDeAlmacenamiento',(req,res) => {
     storageController(storage)
     // const lala = ProductsFactory.useStorage()
     // const nana =CartsFactory.useStorage()
-    const storages = SelectStorage.getInstance()
-    console.log(storage)
-    const persistencia = storages.devolverPersistencia()
+    // const storages = SelectStorage.getInstance()
+    // console.log(storage)
+    const stg = SelectStorage.storage(storage)
+    const persistencia = SelectStorage.devolverPersistencia()
     console.log('persistencia',persistencia); 
     res.redirect('/')
 })

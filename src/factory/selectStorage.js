@@ -1,16 +1,19 @@
+
 let instance = null
+export let persistencia = 'mongo'
 
 export class SelectStorage{
     constructor (storage) {
-        this.persistencia = storage;
+        this.persistencia = 'memory';
     }
     static storage(persistencia){
-        this.persistencia = persistencia//.toLowerCase()
-        return this.persistencia
+        persistencia = persistencia//.toLowerCase()
+        console.log(`La persistencia ahora es ${persistencia}`);
+        // return this.persistencia
     }
 
     static devolverPersistencia() {
-        return this.persistencia
+        return persistencia
     }
 
     static getInstance(){
