@@ -7,7 +7,7 @@ export class ProductsDaoFirebase{
         const snapshot = await productsRef.get();
         let products = []
         snapshot.forEach(doc => {
-            products.push({id:doc.id, data:doc.data()});
+            products.push({id:doc.id, ...doc.data()});
         });
         return products
     }
@@ -15,7 +15,7 @@ export class ProductsDaoFirebase{
     static async getOneProductsById(id){
         const product = productsRef.doc(id);
         const doc = await product.get();
-        const data ={data:doc.data(),id:doc.id}
+        const data ={...doc.data(),id:doc.id}
         if(doc.data()){ 
             return data
         }

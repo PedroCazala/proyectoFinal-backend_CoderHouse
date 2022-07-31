@@ -43,7 +43,9 @@ export class CartsServices{
             cart = await this.getACart(idCart)
             product = await ProductsService.getOneProductsById(idProduct)
             await Factory.addProductToCart(product,idCart,cart)
-        } catch {
+        } catch(error) {
+            logger.error(`Entró al catch addProductToCart`);
+            logger.error(error);
             return{
                 error:`El carrito con el id número: ${idCart}, no existe, y/o el producto con el id número: ${idProduct}, no existe`
             }
