@@ -7,7 +7,7 @@ import session  from 'express-session'
 import passport from 'passport'
 
 export const app = express()
-const PORT = process.env.PORT || 8000
+export const PORT = process.env.PORT || 8000
 //Servidor en marcha
 const server = app.listen(PORT,()=>{
     logger.info(`🔥Escuchando en http://localhost:${PORT}`);
@@ -45,5 +45,13 @@ export const argv = parseArgs(process.argv.slice(2))
 import { mode } from './src/mode/mode.js'
 mode()
 
-// -------- ROUTES -------
+// -------- SWAGGER -------
+import swaggerUi from 'swagger-ui-express'
+import swaggerJsdoc from 'swagger-jsdoc'
+import optionsSwagger from './swagger.js'
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(optionsSwagger)))
+
+// -------- ROUTES (Debe estar al final del server) -------
 app.use('/',allRoutes)
+
