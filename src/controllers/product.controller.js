@@ -1,34 +1,40 @@
+import { logger } from "../logs/log4js.js"
 import { ProductsService } from "../services/products.services.js"
 
 export class ProductsController {
     static async getProducts(req, res){
         const id = req.params.id 
         if(id){
-            // traera uno
+            // traerá uno
                 const product = await ProductsService.getOneProductsById(id)
             if(product){
-                res.send(product)
+                res.status(200).json(product)
             }else{
-                res.send(`El producto con el id número: ${id}, no existe`)
+                res.status(404).json({message:`El producto con el id número: ${id}, no existe`})  
             }
         }else{
             // traerá todos
             const allProducts = await ProductsService.getAllProducts()
-            if(allProducts) {
-                res.send(allProducts)
+            if(allProducts[0]) {
+                res.status(200).json(allProducts)
             } else {
-                res.send(`No hay productos cargados`)
+                res.status(404).json({message:`No hay productos cargados`})
             }
         }
     }
     static async pushProduct(req, res){
-        const date = Date.now() 
-        const newProduct ={date,...req.body}
-        const save = await ProductsService.pushProduct(newProduct)
-        if (save) {
-            res.send(save)
-        }else{
-            res.send('El producto NO se guardo')
+        try {
+            const date = new Date().toLocaleString();
+            const newProduct ={...req.body,date}
+            const save = await ProductsService.pushProduct(newProduct)
+            if (save) {
+                res.status(200).json(save)
+            }else{
+                res.status(404).json({message:'El producto NO se guardo'})
+            }
+        } catch (error){
+            // logger.info('error push product', error)
+            res.status(404).json({message:'El producto NO se guardo'})
         }
     }
     static async updateProduct(req, res){
@@ -36,21 +42,21 @@ export class ProductsController {
         const date = Date.now()
         const newData = req.body
         const modified = await ProductsService.updateProduct(id,date,newData)
-        console.log(modified);
         if (modified) {
-            res.send(modified)
+            res.status(200).json(modified)
         }else{
-            res.send('El producto NO se actualizo')
+            res.status(404).json({message:'El producto NO se actualizo'})
         } 
     }
     static async delateProduct(req, res){
         const id = req.params.id 
-        const deleted = await ProductsService.delateProduct(id)
 
-        if (deleted) {
-            res.send(`Product with id ${id} was deleted`)
+        const deleted = await ProductsService.getOneProductsById(id)
+        await ProductsService.delateProduct(id)
+        if(deleted) {
+            res.status(200).json({message:`Product with id ${id} was deleted`})
         } else {
-            res.send(`No existe ningún producto con el id: ${id}`)
+            res.status(404).json({message:`No existe ningún producto con el id: ${id}`})
         }
     }
 }

@@ -1,0 +1,72 @@
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        name:
+          type: string
+          description: El nombre del producto
+          example: regla
+        price:
+          type: number
+          description: Precio de venta al público
+          example: 145.34
+        description:
+          type: string
+          description: Describe al producto
+          example: Regla de diseño
+        código:
+          type: string
+          description: código de barras del producto
+          example: 234324ree
+        img:
+          type: string
+          description: Imagen del producto
+          example: ./regla.jpg
+        stock:
+          type: string
+          description: Cantidad en inventario del producto
+          example: 34
+        date:
+          type: string
+          readOnly: true
+          description: Fecha de creación del producto
+          example: '2020-01-02'
+        id:
+          type: string
+          readOnly: true
+          format: uuid
+          description: Id del producto. Es un id único.
+          example: df42343243rdfeqwfewf
+      required:
+        - name
+        - price
+        - description
+        - código
+        - img
+        - stock
+
+    Cart:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        date:
+          type: string
+          description: Fecha de creación del carrito
+          readOnly: true
+        id:
+          type: string
+          format: uuid
+          description: Id del carrito
+          readOnly: true
+      required:
+        - products
+        - id
+        - date
+      example:
+        date: '2019-01-01'
+        id: 'jhkjsdafh33l432o323'
+        products: [ '{Product:1}', '{Product:2}', '{...:etc}' ]

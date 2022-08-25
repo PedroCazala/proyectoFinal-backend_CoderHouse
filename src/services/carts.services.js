@@ -1,4 +1,4 @@
-import { CartsFactory } from "../factory/carts .factory.js"
+import { CartsFactory } from "../factory/carts.factory.js"
 import { logger } from "../logs/log4js.js"
 import { ProductsService } from "./products.services.js"
 
@@ -11,6 +11,7 @@ export class CartsServices{
             const date = Date.now() 
             const cart = {date,products:[]}
             const carrito = await Factory.createCart(cart)
+            console.log('cart service carrrrito', carrito);
             return carrito
         } catch (error) {
             logger.error(`Entró al catch create cart`);

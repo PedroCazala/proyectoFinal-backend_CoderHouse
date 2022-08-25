@@ -32,6 +32,7 @@ const Products = [
         "stock": "30"
     }
 ]
+// const Products = []
 export class ProductsDaoMemory{
     static async getAll(){
         return Products

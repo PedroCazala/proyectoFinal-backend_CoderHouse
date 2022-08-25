@@ -2,7 +2,7 @@ import { PORT } from "./server.js";
 
 const optionsSwagger = {
     definition: {
-        openapi: "3.0.0",
+        openapi: "3.0.3",
         info: {
             title: "Express API with Swagger",
             description:
@@ -22,7 +22,7 @@ const optionsSwagger = {
             },
         ],
     },
-    apis: ["./src/routes/*.js"],
+    apis: ["./src/routes/*.js","./src/routes/swagger/*.yaml"],
 };
 
 export default optionsSwagger;

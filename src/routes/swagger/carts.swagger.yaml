@@ -1,0 +1,159 @@
+# ------ Traer todos los productos ------ 
+/api/carrito:
+  post:
+    tags: [Carts]
+    summary: Crear carrito
+    responses:
+      '200':
+        description: Se creó un carrito
+        content:
+          application/json:
+            schema:
+              type: object
+              example: '{message:`carrito creado}'
+      '500':
+        description: No se pudo crear el carrito
+        content:
+          application/json:
+            schema:
+              type: object
+            example: "{message:'No se pudo crear el carrito'}"
+/api/carrito/{id}:
+  delete:
+    tags: [Carts]
+    summary: Elimina un carrito por su Id
+    parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del carrito a eliminar
+    responses:
+      '200':
+        description: Carrito eliminado
+        content:
+          application/json:
+            schema:
+              type: object
+            example: "{message:`Se borró el carrito con el id: ${id}.`}"
+      '404':
+        description: El carrito no se pudo eliminar, porque ya no existía
+        content:
+          application/json:
+            schema:
+              type: object
+            example: "{mensaje:`No se puede borrar carrito con id: ${id}, porque no existe`}"
+
+# # ------Agregar un nuevo producto ------ 
+#   post:
+#     tags: [Products]
+#     summary: Agregar un nuevo producto
+#     requestBody:
+#       required: true
+#       content:
+#         application/json:
+#           schema:
+#             type: object
+#             $ref: '#/components/schemas/Product'
+#     responses:
+#       '200':
+#         description: Producto creado
+#         content:
+#           application/json:
+#             schema:
+#               type: object
+#               $ref: '#/components/schemas/Product'
+#       '404':
+#         description: El producto no pudo ser creado
+#         content:
+#           application/json:
+#             schema:
+#               type: object
+#             example: "{message:'El producto NO se guardo'}"
+
+# # ------Obtener un producto por su id------ 
+# /api/productos/{id}:
+#   get:
+#     tags: [Products]
+#     summary: Get only one products
+#     parameters:
+#       - in: path
+#         name: id
+#         schema:
+#           type: string
+#         required: true
+#         description: ID of the product to get
+#     responses:
+#       '200':
+#         description: An array of products
+#         content:
+#           application/json:
+#             schema:
+#               type: object
+#               $ref: '#/components/schemas/Product'
+#       '404':
+#         description: El producto no existe
+#         content:
+#           application/json:
+#             schema:
+#               type: object
+#             example: "{message:`El producto con el id número: ${id}, no existe`}"
+# # ------ Modificar un producto ------ 
+#   put:
+#     tags: [Products]
+#     summary: Actualiza un producto
+#     parameters:
+#       - in: path
+#         name: id
+#         schema:
+#           type: string
+#         required: true
+#         description: ID of the product to get
+#     requestBody:
+#       required: true
+#       content:
+#         application/json:
+#           schema:
+#             type: object
+#             $ref: '#/components/schemas/Product'
+#     responses:
+#       '200':
+#         description: Actualización de un producto
+#         content:
+#           application/json:
+#             schema:
+#               type: object
+#               $ref: '#/components/schemas/Product'
+#       '404':
+#         description: El producto no se pudo actualizar
+#         content:
+#           application/json:
+#             schema:
+#               type: object
+#             example: "{message:`El producto no se actualizó`}"
+#   delete:
+#     tags: [Products]
+#     summary: Elimina un producto
+#     parameters:
+#         - in: path
+#           name: id
+#           schema:
+#             type: string
+#           required: true
+#           description: ID del producto a eliminar
+#     responses:
+#       '200':
+#         description: Producto eliminado
+#         content:
+#           application/json:
+#             schema:
+#               type: object
+#             example: "{message:`Product with id ${id} was deleted`}"
+#       '404':
+#         description: El producto no existe
+#         content:
+#           application/json:
+#             schema:
+#               type: object
+#             example: "{message:`No existe ningún producto con el id: ${id}`}"

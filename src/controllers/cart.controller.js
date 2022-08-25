@@ -3,23 +3,24 @@ import { CartsServices } from "../services/carts.services.js"
 
 
 export class CartController {
-    static create(req,res){
-        try {
-            CartsServices.create()
-            res.send('carrito creado')
-        } catch (error) {
-            res.send(error.message)
+    static async create(req,res){
+        try{
+            await CartsServices.create()
+            res.status(200).json({message:`carrito creado`})
+        } catch {
+            res.status(500).json({message:'No se pudo crear el carrito'})
         }
     }
-    static delateCart(req,res){
+    static async delateCart(req,res){
         const id = req.params.id
-        const cart = CartsServices.delateCart(id)
+        const cart = await CartsServices.getACart(id)
+        await CartsServices.delateCart(id)
         if(cart){
             //llama al servicio
-            res.send(`Se borró el carrito con el id: ${id}.`)
+            res.status(200).json({message:`Se borró el carrito con el id: ${id}.`})
         }else{
             //avisa que el id no existe al usuario
-            res.send({mensaje:`No se puede borrar carrito con id: ${id}, porque no existe`})
+            res.status(404).json({mensaje:`No se puede borrar carrito con id: ${id}, porque no existe`})
         }
     }
     static async getProducts(req,res){
