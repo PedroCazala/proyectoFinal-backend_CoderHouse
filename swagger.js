@@ -20,6 +20,9 @@ const optionsSwagger = {
             {
                 url:`http://localhost:8080`,
             },
+            {
+                url:`https://proyectofinal-backend-pedro-ch.herokuapp.com/`,
+            },
         ],
     },
     apis: ["./src/routes/*.js","./src/routes/swagger/*.yaml"],
