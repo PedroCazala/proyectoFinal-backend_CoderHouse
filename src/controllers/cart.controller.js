@@ -25,38 +25,39 @@ export class CartController {
     }
     static async getProducts(req,res){
         const idCart = req.params.id
-        let productsOfCart;
         try {
-            productsOfCart = await CartsServices.getProductsOfCart(idCart)
+            const productsOfCart = await CartsServices.getProductsOfCart(idCart)
+            res.status(200).json(productsOfCart)
         } catch (error) {
-            res.send(`El carrito con el id número: ${idCart}, no existe`)
-        }finally{
-            res.send(productsOfCart)
+            res.status(404).json({message:`El carrito con el id número: ${idCart}, no existe`})
         }
     }
     static async addProductToCart(req,res){
         const idCart = req.params.id
         const idProduct = req.body.id
 
-        let productsOfCarts;
         try {
-            productsOfCarts = await CartsServices.addProductToCart(idCart,idProduct)
+            const productsOfCarts = await CartsServices.addProductToCart(idCart,idProduct)
+            if(productsOfCarts){
+                res.status(200).json({message:`Se añadió el producto con id ${idProduct} al carrito con el id ${idCart}`})
+            }else{
+                res.status(404).json({error:`El carrito con el id número: ${idCart}, no existe, y/o el producto con el id número: ${idProduct}, no existe`})
+            }
         } catch (error) {
             logger.error(`Entró al catch addProduct cart`);
             logger.error(error);
-        }finally{
-            res.send(`Se añadió el producto con id ${idProduct} al carrito con el id ${idCart}
-            ${productsOfCarts}`)
         }
     }
     static async deleteAProducts(req,res){
         const idCart = req.params.id
         const idProduct = req.body.id
         try {
-            await CartsServices.deleteAProducts(idCart,idProduct)
-            res.send(`Se eliminó el producto con id ${idProduct} del carrito con el id ${idCart}`)
+            const deleted = await CartsServices.deleteAProducts(idCart,idProduct)
+            deleted ?
+                res.status(200).json({message:`Se eliminó el producto con id ${idProduct} del carrito con el id ${idCart}`})
+            :
+                res.status(404).json({message:`El producto con id ${idProduct} o carrito con el id ${idCart}, no existen`})
         } catch (error) {
-            res.send(`El producto con id ${idProduct} o carrito con el id ${idCart}, no existen`)
             logger.error(`Entró al catch deleteAProduct cart`);
             logger.error(error.message);
         }

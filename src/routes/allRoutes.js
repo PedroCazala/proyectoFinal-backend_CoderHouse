@@ -1,9 +1,8 @@
 import { Router } from "express";
-import { ProductsFactory } from "../factory/products.factory.js";
 import { cartRouter } from "./cart.routes.js";
+import { chatRouter } from "./chat.routes.js";
 import { ecommerceRoutes } from "./frontEcomerceRoutes.js";
 import { productsRouter } from "./products.routes.js";
-import { StorageRoutes } from "./storage.routes.js";
 import { userProfile } from "./userProfileRoutes.js";
 
 
@@ -17,13 +16,14 @@ allRoutes.get('/',(req,res) => {
 
 
 
+//CHAT
+allRoutes.use('/chat',chatRouter)
 
 // allRoutes.use('/api', router)
 allRoutes.use('/api/productos',productsRouter)
 allRoutes.use('/api/carrito',cartRouter)
 allRoutes.use('/e-commerce',ecommerceRoutes)
-//Seleccionar storage
-allRoutes.use('/',StorageRoutes)
+
 // UserProfile login logout register
 allRoutes.use('/',userProfile)
 //Rutas no encontradas

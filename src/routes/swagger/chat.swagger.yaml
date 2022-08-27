@@ -1,0 +1,72 @@
+/chat/api:
+  get:
+    tags: [Chats]
+    summary: Devuelve todos los chats
+    responses:
+      '200':
+        description: Todos los chats
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Chat'
+      '404':
+        description: No se encontraron chats en la base de datos
+        content:
+          application/json:
+            schema:
+              type: object
+            example: "{message:`No se encontraron chats en la base de datos`}"
+  post:
+    tags: [Chats]
+    summary: Agrega un nuevo chat a la base de datos
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: '#/components/schemas/Chat'
+    responses:
+      '200':
+        description: Chat agregado a la base de datos
+        content:
+          application/json:
+            schema:
+              type: string
+            example: "{message:'El chat se ha guardado con éxito en la base de datos'}"
+      '500':
+        description: No se encontraron chats en la base de datos
+        content:
+          application/json:
+            schema:
+              type: object
+            example: "{message:'El chat NO ha guardado en la base de datos',error}"
+
+/chat/api/{id}:
+  delete:
+    tags: [Chats]
+    summary: Elimina a un chat
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: ID del chat
+    responses:
+      '200':
+        description: Se eliminó un chat
+        content:
+          application/json:
+            schema:
+              type: string
+            example: "{message:`El chat con id: ${id}, fué eliminado`}"
+      '404':
+        description: No se eliminó, porque el chat ya no existe en la base de datos
+        content:
+          application/json:
+            schema:
+              type: string
+              example: "{message:`No se encontró ningún chat con el id: ${id} en la base de datos`}"

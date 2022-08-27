@@ -70,3 +70,30 @@ components:
         date: '2019-01-01'
         id: 'jhkjsdafh33l432o323'
         products: [ '{Product:1}', '{Product:2}', '{...:etc}' ]
+
+    Chat:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email de quien envió el chat
+          example: 'ejemplo@gmail.com'
+        date:
+          type: string
+          description: Fecha de creación del chat
+          example: 'Martes 23 de abril, 2022'
+          readOnly: true
+        _id:
+          type: string
+          format: uuid
+          description: Id del chat
+          readOnly: true
+        body:
+          type: string
+          description: El mensaje en sí mismo
+          example: Hola!! Te estoy saludando desde swagger :)
+      required:
+        - email
+        - _id
+        - date
+        - body

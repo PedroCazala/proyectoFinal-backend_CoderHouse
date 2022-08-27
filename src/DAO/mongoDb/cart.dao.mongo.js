@@ -24,8 +24,11 @@ export class CartsDaoMongo{
         }
     }
     static async deleteAProduct(idCart,idProduct,product){
-        const deleted = await CartsModel.updateOne({"_id":idCart},{$pull:{"products":product}})
-        // const deleted = await CartsModel.findOneAndUpdate({_id:idCart},{products:{$pop:{_id:idProduct}}})
-        return deleted
+        try {
+            await CartsModel.updateOne({"_id":idCart},{$pull:{"products":product}})
+            return true
+        } catch {
+            return false
+        }
     }
 }

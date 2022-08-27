@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form onsubmit="return addMessage(this)">
+        <input type="mail" id="mail" placeholder="Tu Nombre*" required />
+        <input type="text" id="texto" placeholder="Cuéntanos algo..." />
+        <input type="submit" value="Enviar" />
+    </form>
+
+    <div id="messagesContainer">
+        <% if (messages[0]){%>
+            <div class="">
+
+            </div>
+            <table class="table">
+                <tbody id="messagesTable">
+                    <% for(const message of messages){ %>
+                        <tr>
+                            <th scope="row">
+                                <%= message.id %>
+                            </th>
+                            <td class="mail">
+                                <%= message.mail %>
+                            </td>
+                            <td class="date">
+                                <%= message.date %>
+                            </td>
+                            <td class="message">
+                                <%= message.text %>
+                            </td>
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>
+        <% } else{ %>
+            <div>No hay mensajes disponibles</div>
+        <% } %>
+    </div>
+</body>
+
+</html>

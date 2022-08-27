@@ -45,115 +45,105 @@
               type: object
             example: "{mensaje:`No se puede borrar carrito con id: ${id}, porque no existe`}"
 
-# # ------Agregar un nuevo producto ------ 
-#   post:
-#     tags: [Products]
-#     summary: Agregar un nuevo producto
-#     requestBody:
-#       required: true
-#       content:
-#         application/json:
-#           schema:
-#             type: object
-#             $ref: '#/components/schemas/Product'
-#     responses:
-#       '200':
-#         description: Producto creado
-#         content:
-#           application/json:
-#             schema:
-#               type: object
-#               $ref: '#/components/schemas/Product'
-#       '404':
-#         description: El producto no pudo ser creado
-#         content:
-#           application/json:
-#             schema:
-#               type: object
-#             example: "{message:'El producto NO se guardo'}"
-
-# # ------Obtener un producto por su id------ 
-# /api/productos/{id}:
-#   get:
-#     tags: [Products]
-#     summary: Get only one products
-#     parameters:
-#       - in: path
-#         name: id
-#         schema:
-#           type: string
-#         required: true
-#         description: ID of the product to get
-#     responses:
-#       '200':
-#         description: An array of products
-#         content:
-#           application/json:
-#             schema:
-#               type: object
-#               $ref: '#/components/schemas/Product'
-#       '404':
-#         description: El producto no existe
-#         content:
-#           application/json:
-#             schema:
-#               type: object
-#             example: "{message:`El producto con el id número: ${id}, no existe`}"
-# # ------ Modificar un producto ------ 
-#   put:
-#     tags: [Products]
-#     summary: Actualiza un producto
-#     parameters:
-#       - in: path
-#         name: id
-#         schema:
-#           type: string
-#         required: true
-#         description: ID of the product to get
-#     requestBody:
-#       required: true
-#       content:
-#         application/json:
-#           schema:
-#             type: object
-#             $ref: '#/components/schemas/Product'
-#     responses:
-#       '200':
-#         description: Actualización de un producto
-#         content:
-#           application/json:
-#             schema:
-#               type: object
-#               $ref: '#/components/schemas/Product'
-#       '404':
-#         description: El producto no se pudo actualizar
-#         content:
-#           application/json:
-#             schema:
-#               type: object
-#             example: "{message:`El producto no se actualizó`}"
-#   delete:
-#     tags: [Products]
-#     summary: Elimina un producto
-#     parameters:
-#         - in: path
-#           name: id
-#           schema:
-#             type: string
-#           required: true
-#           description: ID del producto a eliminar
-#     responses:
-#       '200':
-#         description: Producto eliminado
-#         content:
-#           application/json:
-#             schema:
-#               type: object
-#             example: "{message:`Product with id ${id} was deleted`}"
-#       '404':
-#         description: El producto no existe
-#         content:
-#           application/json:
-#             schema:
-#               type: object
-#             example: "{message:`No existe ningún producto con el id: ${id}`}"
+/api/carrito/{id}/productos:
+  get:
+    tags: [Carts]
+    summary: Trae el array de productos del carrito
+    parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del carrito que se necesita traer los productos
+    responses:
+      '200':
+        description: Productos del carrito
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Product'
+      '404':
+        description: El carrito no existe
+        content:
+          application/json:
+            schema:
+              type: object
+            example: "{message:`El carrito con el id número: ${idCart}, no existe`}"
+  post:
+    tags: [Carts]
+    summary: Añade un producto al carrito
+    parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del carrito
+          example: 62e5b435812232251965fd0c
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: id del producto
+                example: 62cddf78539feda573da0f62
+    responses:
+      '200':
+        description: Productos del carrito
+        content:
+          application/json:
+            schema:
+              type: object
+              items: "{message:`Se añadió el producto con id ${idProduct} al carrito con el id ${idCart}`}"
+      '404':
+        description: El carrito no existe
+        content:
+          application/json:
+            schema:
+              type: object
+            example: "{error:`El carrito con el id número: ${idCart}, no existe, y/o el producto con el id número: ${idProduct}, no existe`}"
+  delete:
+    tags: [Carts]
+    summary: Elimina un producto del carrito
+    parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: ID del carrito
+          example: 62e5b435812232251965fd0c
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: id del producto
+                example: 62cddf78539feda573da0f62
+    responses:
+      '200':
+        description: Se elimino el producto del carrito
+        content:
+          application/json:
+            schema:
+              type: object
+            example: "{message:`Se eliminó el producto con id ${idProduct} del carrito con el id ${idCart}`}"
+      '404':
+        description: El carrito no existe
+        content:
+          application/json:
+            schema:
+              type: object
+            example: "{error:`El carrito con el id número: ${idCart}, no existe, y/o el producto con el id número: ${idProduct}, no existe`}"
+    

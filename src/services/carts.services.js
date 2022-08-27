@@ -43,20 +43,27 @@ export class CartsServices{
         try {
             cart = await this.getACart(idCart)
             product = await ProductsService.getOneProductsById(idProduct)
-            await Factory.addProductToCart(product,idCart,cart)
+            if (cart && product) {
+                return await Factory.addProductToCart(product,idCart,cart)
+            }else{
+                return false
+            }
         } catch(error) {
             logger.error(`Entró al catch addProductToCart`);
             logger.error(error);
-            return{
-                error:`El carrito con el id número: ${idCart}, no existe, y/o el producto con el id número: ${idProduct}, no existe`
-            }
         }
     }
     static async deleteAProducts(idCart,idProduct){
         try {
             const product = await ProductsService.getOneProductsById(idProduct)
+            const existInCart = await this.getProductsOfCart(idCart).find(prod=> prod.id == idProduct)
+            console.log(existInCart)
             const deleted = await Factory.deleteAProduct(idCart,idProduct,product)
-            return deleted
+            if(product && deleted){
+                return true
+            }else{
+                return false
+            }
         } catch (error) {
             logger.info('SERVICE DeleteProduct',error.message);
             logger.info('SERVICE DeleteProduct',error);
