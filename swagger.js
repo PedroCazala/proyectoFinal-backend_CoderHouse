@@ -21,7 +21,7 @@ const optionsSwagger = {
                 url:`http://localhost:8080`,
             },
             {
-                url:`https://proyectofinal-backend-pedro-ch.herokuapp.com/`,
+                url:`https://proyectofinal-backend-pedro-ch.herokuapp.com`,
             },
         ],
     },
