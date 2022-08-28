@@ -8,6 +8,10 @@ import passport from 'passport'
 
 export const app = express()
 
+//pasar por argumento el puerto
+import parseArgs from 'minimist';
+export const argv = parseArgs(process.argv.slice(2))
+
 // -------- sockets -------
 import { Server as HttpServer} from 'http' 
 import {Server as IOServer} from 'socket.io'
@@ -15,19 +19,20 @@ import axios from 'axios'
 const httpServer = new HttpServer(app);
 export const io = new IOServer(httpServer);
 
-
-
+const development = argv.development || false
+console.log('development,',development);
 io.on("connection", function (socket) {
     logger.warn('Nuevo usuario conectado 1');
 
     socket.on('newChat', ()=>{
+        development ?
+            axios('http://localhost:8080/chat/api')
+            .then(res=>io.sockets.emit("chat",res.data))
+            .catch(err=>console.log('Errorrrrr:',err))
+        :
             axios(`${process.env.HOST_HEROKU}/chat/api`)
             .then(res=>io.sockets.emit("chat",res.data))
             .catch(err=>console.log('Errorrrrr:',err))
-
-            // axios('http://localhost:8080/chat/api')
-            // .then(res=>io.sockets.emit("chat",res.data))
-            // .catch(err=>console.log('Errorrrrr:',err))
     })
 })
 
@@ -62,9 +67,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 import './src/passport/passport-local.js'
 
-//pasar por argumento el puerto
-import parseArgs from 'minimist';
-export const argv = parseArgs(process.argv.slice(2))
 
 //Para poder utilizar distintos modos de implementación del servidor
 import { mode } from './src/mode/mode.js'
@@ -79,4 +81,3 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(optionsSwagge
 
 // -------- ROUTES (Debe estar al final del server) -------
 app.use('/',allRoutes)
-
