@@ -20,12 +20,14 @@ export const io = new IOServer(httpServer);
 io.on("connection", function (socket) {
     logger.warn('Nuevo usuario conectado 1');
 
-    socket.on('newChat', (newMessage)=>{
-        // let messages = []
-        axios('http://localhost:8080/chat/api' || `${process.env.HOST_HEROKU}/chat/api`)
-        // .then(res => messages = res.data)
-        .then(res=>io.sockets.emit("chat",res.data))
-        .catch(err=>console.log('Errorrrrr:',err))
+    socket.on('newChat', ()=>{
+            axios(`${process.env.HOST_HEROKU}/chat/api`)
+            .then(res=>io.sockets.emit("chat",res.data))
+            .catch(err=>console.log('Errorrrrr:',err))
+
+            // axios('http://localhost:8080/chat/api')
+            // .then(res=>io.sockets.emit("chat",res.data))
+            // .catch(err=>console.log('Errorrrrr:',err))
     })
 })
 
