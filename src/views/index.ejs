@@ -25,20 +25,7 @@
             <%- include('./partials/navbar'); %>
         <% } %>
 
-        <div class="profileButtons">
-            <form action="/login" method="get">
-                <p>Ya tenes una cuenta:</p>
-                <button class="btn btn-dark" type="submit">Ir a iniciar sesión</button>
-            </form>
-            <form action="/register" method="get">
-                <p>Todavía no tenes una cuenta:</p>
-                <button class="btn btn-dark" type="submit">Ir a registrarse</button>
-            </form>
-            <form action="/chat" method="get">
-                <p>Ir al chat:</p>
-                <button class="btn btn-dark" type="submit">Chat</button>
-            </form>
-        </div>
+        <%- include('./partials/footer'); %>
     </div>
     <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
