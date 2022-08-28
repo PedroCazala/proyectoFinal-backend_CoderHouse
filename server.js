@@ -22,7 +22,7 @@ io.on("connection", function (socket) {
 
     socket.on('newChat', (newMessage)=>{
         // let messages = []
-        axios('http://localhost:8080/chat/api')
+        axios('http://localhost:8080/chat/api' || `${process.env.HOST_HEROKU}/chat/api`)
         // .then(res => messages = res.data)
         .then(res=>io.sockets.emit("chat",res.data))
         .catch(err=>console.log('Errorrrrr:',err))

@@ -23,8 +23,13 @@
     <h1>Nuevo Mensaje</h1>
     <form class="formsProfile" onsubmit="return addMessage(this)">
         <div class="mb-3">
-            <label for="email" class="form-label">Ingresa tu email</label>
-            <input type="email" required class="form-control" id="email" name="email">
+            <label for="email" class="form-label">Ingresa tu email (si estás logueado se ingresará solo)</label>
+            <input type="email" required class="form-control" id="email" name="email"
+                placeholder = "Ingresa tu email"
+                <% if (user){ %>
+                    value="<%=user.email%>" 
+                <% } %>
+            >
         </div>
         <div class="mb-3">
             <label for="mensaje" class="form-label">Ingresa tu mensaje</label>

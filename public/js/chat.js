@@ -64,5 +64,3 @@ socket.on("chat", function (messages) {
     renderMessages(messages);
 });
 
-//pasqar a chat.ejs
-// value="<%=user.email%>" 
