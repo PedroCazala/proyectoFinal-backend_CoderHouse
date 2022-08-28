@@ -7,12 +7,35 @@ import session  from 'express-session'
 import passport from 'passport'
 
 export const app = express()
+
+// -------- sockets -------
+import { Server as HttpServer} from 'http' 
+import {Server as IOServer} from 'socket.io'
+import axios from 'axios'
+const httpServer = new HttpServer(app);
+export const io = new IOServer(httpServer);
+
+
+
+io.on("connection", function (socket) {
+    logger.warn('Nuevo usuario conectado 1');
+
+    socket.on('newChat', (newMessage)=>{
+        // let messages = []
+        axios('http://localhost:8080/chat/api')
+        // .then(res => messages = res.data)
+        .then(res=>io.sockets.emit("chat",res.data))
+        .catch(err=>console.log('Errorrrrr:',err))
+    })
+})
+
 export const PORT = process.env.PORT || 8000
 //Servidor en marcha
-const server = app.listen(PORT,()=>{
+export const server = httpServer.listen(PORT,()=>{
     logger.info(`🔥Escuchando en http://localhost:${PORT}`);
 })
 server.on('error', error  => logger.error(`Error en el servidor ${error}`))
+
 
 //poder enviar json
 app.use(express.json())

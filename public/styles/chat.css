@@ -1,0 +1,41 @@
+form {
+  display: flex;
+  flex-flow: column wrap;
+  max-width: 80%;
+  gap: 8px;
+  margin: 15px auto;
+}
+form input {
+  margin: auto;
+}
+
+#messagesTable {
+  background-color: black;
+  padding: 20px;
+}
+#messagesTable th, #messagesTable td {
+  border-radius: 15px;
+  box-shadow: 2px 2px 15px grey;
+  padding: 10px 8px;
+  color: white;
+}
+#messagesTable .mail {
+  color: greenyellow;
+}
+#messagesTable .message {
+  color: palevioletred;
+  font-style: italic;
+}
+#messagesTable * {
+  border-bottom-width: 0px;
+}
+
+button {
+  color: white;
+  background-color: black;
+  border: 0px;
+}
+
+.allContainer {
+  padding: 0 2%;
+}/*# sourceMappingURL=chat.css.map */

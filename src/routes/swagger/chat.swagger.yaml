@@ -1,3 +1,10 @@
+/chat:
+  get:
+    tags: [Chats, Vistas]
+    summary: Devuelve todos los chats
+    responses:
+      '200':
+        description: Devuelve una vista con los chats
 /chat/api:
   get:
     tags: [Chats]

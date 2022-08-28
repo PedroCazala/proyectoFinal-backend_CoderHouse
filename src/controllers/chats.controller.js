@@ -1,8 +1,10 @@
 import { chatService } from "../services/chats.services.js"
 
 export class ChatsController{
-    static view(req,res){
-        res.status(200).render('chat')
+    static async view(req,res){
+        const messages = await chatService.getAll()
+        const user = req.user
+        res.status(200).render('chat',{messages,user})
     }
 
     static async create(req,res){
