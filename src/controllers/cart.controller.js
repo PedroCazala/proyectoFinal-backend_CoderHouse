@@ -4,11 +4,23 @@ import { CartsServices } from "../services/carts.services.js"
 
 export class CartController {
     static async create(req,res){
+        const bodyReq = req.body
         try{
-            await CartsServices.create()
-            res.status(200).json({message:`carrito creado`})
+            const id = await CartsServices.create(bodyReq)
+            res.status(200).json({message:`carrito creado`,id})
         } catch {
             res.status(500).json({message:'No se pudo crear el carrito'})
+        }
+    }
+    static async getACart (req,res) {
+        const id = req.params.id
+        const cart = await CartsServices.getACart(id)
+        if(cart){
+            //llama al servicio
+            res.status(200).json(cart)
+        }else{
+            //avisa que el id no existe al usuario
+            res.status(404).json({mensaje:`No se puede encontrar carrito con id: ${id}, porque no existe`})
         }
     }
     static async delateCart(req,res){
@@ -34,12 +46,14 @@ export class CartController {
     }
     static async addProductToCart(req,res){
         const idCart = req.params.id
-        const idProduct = req.body.id
+        const {idProduct,quantity} = req.body
 
         try {
-            const productsOfCarts = await CartsServices.addProductToCart(idCart,idProduct)
-            if(productsOfCarts){
-                res.status(200).json({message:`Se añadió el producto con id ${idProduct} al carrito con el id ${idCart}`})
+            let productsOfCarts = await CartsServices.addProductToCart({idCart,idProduct,quantity})
+            if(productsOfCarts == 'updated'){
+                res.status(200).json({message:`Se ACTUALIZO el producto con id ${idProduct} del carrito con el id ${idCart}`})
+            }else if(productsOfCarts == 'added'){
+                res.status(200).json({message:`Se AÑADIO el producto con id ${idProduct} al carrito con el id ${idCart}`})
             }else{
                 res.status(404).json({error:`El carrito con el id número: ${idCart}, no existe, y/o el producto con el id número: ${idProduct}, no existe`})
             }

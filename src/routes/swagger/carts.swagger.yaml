@@ -3,6 +3,13 @@
   post:
     tags: [Carts]
     summary: Crear carrito
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: '#/components/schemas/Cart'
     responses:
       '200':
         description: Se creó un carrito
@@ -10,7 +17,7 @@
           application/json:
             schema:
               type: object
-              example: '{message:`carrito creado}'
+              example: '{ "message": "carrito creado", "id": "630cf4a56bdbb99a4bf2e259"}'
       '500':
         description: No se pudo crear el carrito
         content:
@@ -18,7 +25,7 @@
             schema:
               type: object
             example: "{message:'No se pudo crear el carrito'}"
-/api/carrito/{id}:
+/api/ordenes/{id}:
   delete:
     tags: [Carts]
     summary: Elimina un carrito por su Id

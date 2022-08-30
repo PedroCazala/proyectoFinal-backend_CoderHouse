@@ -9,6 +9,9 @@ const cartRouter = Router()
 cartRouter.post('/',(req,res)=>{
     CartController.create(req,res)
 })
+cartRouter.get('/:id',(req,res)=>{
+    CartController.getACart(req,res)
+})
 cartRouter.delete('/:id',(req,res)=>{
     CartController.delateCart(req,res)
 })

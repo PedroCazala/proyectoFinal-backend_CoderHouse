@@ -19,7 +19,7 @@ import axios from 'axios'
 const httpServer = new HttpServer(app);
 export const io = new IOServer(httpServer);
 
-const development = argv.development || false
+export const development = argv.development || false
 logger.info('development,',development);
 io.on("connection", function (socket) {
     logger.warn('Nuevo usuario conectado 1');

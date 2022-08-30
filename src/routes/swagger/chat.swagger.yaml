@@ -1,10 +1,25 @@
 /chat:
   get:
     tags: [Chats, Vistas]
-    summary: Devuelve todos los chats
+    summary: Devuelve una vista con todos los chats
     responses:
       '200':
         description: Devuelve una vista con los chats
+/ver/{email}:
+  get:
+    tags: [Chats, Vistas]
+    summary: Devuelve una vista con todos los chats del usuario con el {email}
+    parameters:
+      - in: path
+        name: email
+        schema:
+          type: string
+        required: true
+        description: email del usuario que envió el chat
+    responses:
+      '200':
+        description: Devuelve una vista con los chats del usuario con el {email}
+
 /chat/api:
   get:
     tags: [Chats]
@@ -25,6 +40,33 @@
             schema:
               type: object
             example: "{message:`No se encontraron chats en la base de datos`}"
+/chat/api/{email}:
+  get:
+    tags: [Chats]
+    summary: Devuelve todos los chats
+    parameters:
+      - in: path
+        name: email
+        schema:
+          type: string
+        required: true
+        description: email del usuario que envió el chat
+    responses:
+      '200':
+        description: Todos los chats con el {email}
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Chat'
+      '404':
+        description: No se encontraron chats enviados por {email} en la base de datos
+        content:
+          application/json:
+            schema:
+              type: object
+            example: "{message:`No se encontraron chats en la base de datos enviados desde el email: ${email}`}"
   post:
     tags: [Chats]
     summary: Agrega un nuevo chat a la base de datos

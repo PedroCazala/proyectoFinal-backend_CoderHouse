@@ -10,6 +10,10 @@ export class chatService{
         const allMessages = await chatDaoMongo.getAll()
         return allMessages
     }
+    static async getForEmail(email){
+        const messages = await chatDaoMongo.getForEmail(email)
+        return messages
+    }
     static async getOne(id){
         try {
             const allMessages = await chatDaoMongo.getOne(id)

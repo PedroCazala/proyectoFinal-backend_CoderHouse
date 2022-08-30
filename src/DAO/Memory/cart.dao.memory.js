@@ -21,9 +21,8 @@ export class CartsDaoMemory{
 
     static async addProductToCart(product,idCart){
         try {
-            const cart = await this.getACart(idCart)
-            const update = cart.products.push(product)
-            return update
+            await this.getACart(idCart)
+            return true
         } catch (error) {
             logger.info('entro al catch');
             logger.info(error);

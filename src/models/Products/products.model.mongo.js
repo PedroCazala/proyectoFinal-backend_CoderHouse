@@ -9,6 +9,8 @@ const productsSchema = new mongoose.Schema({
     img:{type:String,required:true},
     price:{type:Number,required:true},
     stock:{type:Number,required:true},
-    date:{type:String,required:true}
+    date:{type:String,required:true},
+    category:{type:String,required:true},
+    quantity:{type:Number}
 })
 export const ProductModel = mongoose.model(productsCollection,productsSchema) 

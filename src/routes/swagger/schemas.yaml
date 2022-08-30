@@ -6,7 +6,7 @@ components:
         name:
           type: string
           description: El nombre del producto
-          example: regla
+          example: regla de 15cm
         price:
           type: number
           description: Precio de venta al público
@@ -32,12 +32,20 @@ components:
           readOnly: true
           description: Fecha de creación del producto
           example: '2020-01-02'
+        category:
+          type: string
+          description: Categoría del producto
+          example: 'reglas'
         id:
           type: string
           readOnly: true
           format: uuid
           description: Id del producto. Es un id único.
           example: df42343243rdfeqwfewf
+        quantity:
+          type: number
+          description: Cantidad del producto solo aparecerá en el carrito
+          example: 3
       required:
         - name
         - price
@@ -45,31 +53,110 @@ components:
         - código
         - img
         - stock
+        - category
 
     Cart:
       type: object
       properties:
         products:
           type: array
+          readOnly: true
           items:
             $ref: '#/components/schemas/Product'
         date:
           type: string
           description: Fecha de creación del carrito
           readOnly: true
+          example: '2019-01-01'
         id:
           type: string
           format: uuid
           description: Id del carrito
           readOnly: true
+          example: 'jhkjsdafh33l432o323'
+        email:
+          type: string
+          description: El email del usuario
+          example: 'ejemplo@swagger.com'
+        address:
+          type: string
+          description: La dirección de entrega
+          example: Belgrano 1230
+        city:
+          type: string
+          description: La ciudad de entrega
+          example: Lujan
+        province:
+          type: string
+          description: La provincia de entrega
+          example: Buenos Aires
       required:
         - products
         - id
         - date
-      example:
-        date: '2019-01-01'
-        id: 'jhkjsdafh33l432o323'
-        products: [ '{Product:1}', '{Product:2}', '{...:etc}' ]
+    Order:
+      type: object
+      properties:
+        products:
+          type: array
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/Product'
+        date:
+          type: string
+          description: Fecha de creación del carrito
+          readOnly: true
+          example: '2019-01-01'
+        id:
+          type: string
+          format: uuid
+          description: Id del carrito
+          readOnly: true
+          example: 'jhkjsdafh33l432o323'
+        email:
+          type: string
+          description: El email del usuario
+          example: 'ejemplo@swagger.com'
+        address:
+          type: string
+          description: La dirección de entrega
+          example: Belgrano 1230
+        city:
+          type: string
+          description: La ciudad de entrega
+          example: Lujan
+        province:
+          type: string
+          description: La provincia de entrega
+          example: Buenos Aires
+        dateOrder:
+          type: string
+          description: Fecha de emisión de la orderNumber
+          example: '2019-01-05'
+        state:
+          type: string
+          description: Estado de la orden
+          example: generada
+        totalPrice:
+          type: number
+          description: monto total de la orden ( suma de (Cantidad * Precio) de cada producto )
+          total: 2344.34
+        orderNumber:
+          type: number
+          description: Numero de orden
+          example: 4
+      required:
+        - products
+        - id
+        - date
+        - email 
+        - address 
+        - city 
+        - province 
+        - dateOrder 
+        - state 
+        - totalPrice 
+        - orderNumber
 
     Chat:
       type: object

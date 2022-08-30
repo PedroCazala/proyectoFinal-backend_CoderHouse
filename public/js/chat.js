@@ -59,8 +59,16 @@ const renderMessages = (messages)=>{
     messagesTable.innerHTML = html
 
 }
-
+const email = document.getElementById('email')
+const emailToView = document.getElementById('emailToView')
+email.addEventListener("change",()=>{
+    emailToView.innerHTML = email.value
+})
+const viewChatForEmail=()=>{
+    console.log(email.value);
+    window.location.href = `/chat/ver/${email.value}`
+    return false
+}
 socket.on("chat", function (messages) {
     renderMessages(messages);
 });
-

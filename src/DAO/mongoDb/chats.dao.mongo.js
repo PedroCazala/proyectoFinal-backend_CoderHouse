@@ -9,6 +9,10 @@ export class chatDaoMongo{
         const allChats = await chatModel.find()
         return allChats
     }
+    static async getForEmail(email){
+        const chats = await chatModel.find({email})
+        return chats
+    }
     static async getOne(id){
         const chat = await chatModel.findOne({_id:id})
         return chat

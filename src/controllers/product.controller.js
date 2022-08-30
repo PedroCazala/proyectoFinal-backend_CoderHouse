@@ -22,6 +22,15 @@ export class ProductsController {
             }
         }
     }
+    static async getProductsForCategory(req, res){
+        const {category} = req.params 
+        const products = await ProductsService.getProductsForCategory(category)
+        if(products){
+            res.status(200).json(products)
+        }else{
+            res.status(404).json({message:`No existen productos con la categoría: ${category}`})  
+        }
+    }
     static async pushProduct(req, res){
         try {
             const date = new Date().toLocaleString();

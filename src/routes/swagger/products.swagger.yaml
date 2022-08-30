@@ -60,12 +60,42 @@
         description: ID of the product to get
     responses:
       '200':
-        description: An array of products
+        description: Un array de productos con la {category}
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Product'
+      '404':
+        description: El producto no existe
         content:
           application/json:
             schema:
               type: object
-              $ref: '#/components/schemas/Product'
+            example: "{message:`El producto con el id número: ${id}, no existe`}"
+# ------Obtener  productos por su categoría------ 
+/api/productos/categoria/{category}:
+  get:
+    tags: [Products]
+    summary: Obtener  productos por su categoría
+    parameters:
+      - in: path
+        name: category
+        schema:
+          type: string
+        required: true
+        description: categoría para obtener los productos
+        example: lapices
+    responses:
+      '200':
+        description: Devuelve un array de productos con la {category}
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Product'
       '404':
         description: El producto no existe
         content:

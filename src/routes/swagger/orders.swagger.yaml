@@ -1,0 +1,128 @@
+/api/ordenes/{idCart}:
+  post:
+    tags: [Orders]
+    summary: Generar orden
+    parameters:
+      - in: path
+        name: idCart
+        schema:
+          type: string
+        required: true
+        description: ID del carrito con el que se quiere generar la orden
+    responses:
+      '200':
+        description: Se generó una orden
+        content:
+          application/json:
+            schema:
+              type: object
+              example: '{ "message": "carrito creado", order}'
+      '404':
+        description: No se pudo crear el carrito
+        content:
+          application/json:
+            schema:
+              type: object
+            example: "{message:`No se pudo guardar la orden`,error:error.message}"
+/api/ordenes/{idOrder}:
+    put:
+      tags: [Orders]
+      summary: Actualiza el estado de una orden
+      parameters:
+        - in: path
+          name: idOrder
+          schema:
+            type: string
+          required: true
+          description: ID de la orden
+          example: 630d3e59ec154ceb934e3969
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                newState: 
+                  type: string
+                  description: Setea el estado de la orden
+                  example: despachada
+      responses:
+        '200':
+          description: Actualización del estado de la orden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "se modificó el estado de la orden con id: ${order._id}"
+                  newState:
+                    type: string
+                    example: enviado
+                  order:
+                    type: object
+                    $ref: '#/components/schemas/Order'
+        '500':
+          description: El producto no se pudo actualizar
+          content:
+            application/json:
+              schema:
+                type: object
+              example: "{message:`No se pudo modificar el estado de la orden con id: ${idOrder}`}"
+/api/ordenes:
+  get:
+    tags: [Orders]
+    summary: Trae todas las ordenes
+    responses:
+      '200':
+        description: Devuelve el array con las ordenes
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Order'
+      '500':
+        description: No se pueden recuperar las ordenes
+        content:
+          application/json:
+            schema:
+              type: object
+            example: "error"
+/api/ordenes/{email}:
+  get:
+    tags: [Orders]
+    summary: Trae todas las ordenes del {email}
+    parameters:
+      - in: path
+        name: email
+        schema:
+          type: string
+        required: true
+        description: email del usuario
+        example: ejemplo@swagger.com
+    responses:
+      '200':
+        description: Devuelve el array con las ordenes del {email}
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Order'
+      '404':
+        description: No hay ordenes con el {email}
+        content:
+          application/json:
+            schema:
+              type: object
+            example: "{message:`No hay ordenes con el email: ${email}`}"
+      '500':
+        description: No se pueden recuperar las ordenes
+        content:
+          application/json:
+            schema:
+              type: object
+            example: "error"

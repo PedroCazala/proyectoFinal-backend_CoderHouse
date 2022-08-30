@@ -3,22 +3,28 @@ import { adminPermission } from '../middlewares.js'
 
 //Controller
 import {ProductsController} from '../controllers/product.controller.js'
-const Products = ProductsController
 
 const {Router} = express
 const productsRouter = Router()
 
 productsRouter.get('/:id?',(req,res)=>{
-    Products.getProducts(req,res)
+    ProductsController.getProducts(req,res)
+})
+productsRouter.get('/categoria/:category',(req,res)=>{
+    ProductsController.getProductsForCategory(req,res)
 })
 productsRouter.post('/', adminPermission,(req,res)=>{
-    Products.pushProduct(req,res)
+    ProductsController.pushProduct(req,res)
 })
 productsRouter.put('/:id',adminPermission,(req,res)=>{
-    Products.updateProduct(req,res)
+    ProductsController.updateProduct(req,res)
 })
 productsRouter.delete('/:id',adminPermission,(req,res)=>{
-    Products.delateProduct(req,res)
+    ProductsController.delateProduct(req,res)
 })
 
 export {productsRouter}
+{/* <form action="/chat/<%= document.getElementById('email').value %>" method="get">
+    <p>Ver solo los mail de <%= document.getElementById('email').value %>:</p>
+    <button class="btn btn-black" type="submit">Mis mails</button>
+</form> */}

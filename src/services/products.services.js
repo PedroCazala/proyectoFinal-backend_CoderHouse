@@ -22,6 +22,15 @@ export class ProductsService {
         } 
     }
 
+    static async getProductsForCategory(category){
+        try {
+            const product = await Factory.getProductsForCategory(category)
+            return product
+        } catch (error) {
+            logger.info('SERVICE GetOneProductsById',error.message);
+        } 
+    }
+
     static async pushProduct(newProduct){
         try {
             const product = await Factory.pushProduct(newProduct)

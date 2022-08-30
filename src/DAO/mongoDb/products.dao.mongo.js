@@ -8,7 +8,12 @@ export class ProductsDaoMongo{
 
     static async getOneProductsById(id){
         const product = await ProductModel.findOne({_id:id})
-        return product
+        return product._doc
+    }
+
+    static async getProductsForCategory(category){
+        const products = await ProductModel.find({category})
+        return products
     }
 
     static async pushProduct(newProduct){

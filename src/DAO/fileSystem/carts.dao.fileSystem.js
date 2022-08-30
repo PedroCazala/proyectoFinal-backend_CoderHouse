@@ -7,7 +7,7 @@ export class CartsDaoFileSystem extends FileSystemContainer{
         const newCart = {...cart,id:newId(Carts)}
         Carts.push(newCart)
         super.updateCartsFile()
-        return newCart
+        return newCart.id
     }
     static async deleteCart(id){
         super.getCartsFile()
