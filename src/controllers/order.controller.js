@@ -9,14 +9,15 @@ export class OrderController{
             const order = await OrderService.generate(idCart)
             if (order) {
                 const html = `
-                <h1>Nueva orden ${order.id} || ${order.email}</h1>
+                <h1 style="color:pink;background-color:black; text-align:center;border-radius:15px;padding:5px;">Nueva orden ${order.id} || ${order.dateOrder} </h1>
+                <h2>Mail del usuario: ${order.email}</h2>
                 <p>Se ha generado una nueva orden, el numero de  orden es el ${order.orderNumber}</p>
                 <p>Se debe enviar a  ${order.address}, ${order.city}, ${order.province}</p>
                 <h2>Compro los siguientes productos</h2>
                 <ul>
                     ${order.products.map(prod => {
                         return`
-                            <li> nombre del producto: ${prod.name}, id: ${prod._id}, precio: ${prod.price}, cantidad: ${prod.quantity} </li>
+                            <li> nombre del producto: ${prod.name}, id: ${prod._id}, precio: $${prod.price}, cantidad: ${prod.quantity} </li>
                         `
                     }).join(" ")}
                 </ul>

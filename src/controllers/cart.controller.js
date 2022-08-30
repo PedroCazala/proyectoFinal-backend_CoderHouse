@@ -50,6 +50,7 @@ export class CartController {
 
         try {
             let productsOfCarts = await CartsServices.addProductToCart({idCart,idProduct,quantity})
+            console.log(productsOfCarts);
             if(productsOfCarts == 'updated'){
                 res.status(200).json({message:`Se ACTUALIZO el producto con id ${idProduct} del carrito con el id ${idCart}`})
             }else if(productsOfCarts == 'added'){

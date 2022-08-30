@@ -97,10 +97,14 @@
           schema:
             type: object
             properties:
-              id:
+              idProduct:
                 type: string
                 description: id del producto
                 example: 62cddf78539feda573da0f62
+              quantity:
+                type: string
+                description: cantidad a agregar del producto
+                example: 3
     responses:
       '200':
         description: Productos del carrito
