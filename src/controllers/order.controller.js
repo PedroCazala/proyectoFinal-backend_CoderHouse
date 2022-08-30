@@ -7,8 +7,26 @@ export class OrderController{
         try {
             const {idCart} = req.params
             const order = await OrderService.generate(idCart)
-            sendEmailToAdmin(order)
-            res.status(200).json({message:`La orden se inserto con exito, con el id: ${order._id}`,order})
+            if (order) {
+                const html = `
+                <h1>Nueva orden ${order.id} || ${order.email}</h1>
+                <p>Se ha generado una nueva orden, el numero de  orden es el ${order.orderNumber}</p>
+                <p>Se debe enviar a  ${order.address}, ${order.city}, ${order.province}</p>
+                <h2>Compro los siguientes productos</h2>
+                <ul>
+                    ${order.products.map(prod => {
+                        return`
+                            <li> nombre del producto: ${prod.name}, id: ${prod._id}, precio: ${prod.price}, cantidad: ${prod.quantity} </li>
+                        `
+                    }).join(" ")}
+                </ul>
+                <p>El precio total es: $${order.totalPrice}</p>
+                `
+                sendEmailToAdmin({html,subject:'Nueva orden generada'})
+                res.status(200).json({message:`La orden se inserto con exito, con el id: ${order._id}`,order})
+            }else{
+                res.status(404).json({message:`No se pudo guardar la orden`})
+            }
         } catch (error) {
             res.status(404).json({message:`No se pudo guardar la orden`,error:error.message})
             
