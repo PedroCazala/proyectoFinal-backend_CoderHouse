@@ -184,3 +184,50 @@ components:
         - _id
         - date
         - body
+
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+          description: Id del chat
+          readOnly: true
+        email:
+          type: string
+          description: Email de quien envió el chat
+          example: 'ejemplo@gmail.com'
+        password:
+          type: string
+          description: Contraseña del usuario
+          example: 'MiContraseña'
+        name:
+          type: string
+          description: Nombre del usuario
+          example: Pepe
+        address:
+          type: string
+          description: Dirección del usuario
+          example: Av Pepe
+        age:
+          type: number
+          description: Edad del usuario
+          example: 33
+        phone:
+          type: number
+          description: Numero del celular del usuario
+          example: +542323689791
+        img:
+          type: string
+          description: url de la dirección de la Imagen
+          example: "https://okdiario.com/img/2020/06/25/manu-rios-655x368.jpg"
+
+      required:
+        - email
+        - _id
+        - password
+        - name
+        - address
+        - age
+        - phone
+        - img

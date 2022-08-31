@@ -29,34 +29,48 @@ const addMessage = () =>{
 
 const renderMessages = (messages)=>{
     document.getElementById('body').value = ""
-    const html =messages
-        .map(message => {
-            return `
-                <tr>
-                    <th scope="row">
-                        ${ message._id }
-                    </th>
-                    <td class="mail">
-                        ${ message.email }
-                    </td>
-                    <td class="date">
-                        ${ message.date }
-                    </td>
-                    <td class="message">
-                        ${ message.body }
-                    </td>
-                    <td>
-                        <button id="btnDeletedOne" onclick= "deletedOneChat('${message._id}')">
-                            Eliminar
-                        </button>
-                    </td>
-                </tr>
-            `
-        })
-        .join(" ")
-
-    const messagesTable = document.getElementById('messagesTable')
-    messagesTable.innerHTML = html
+    const messagesContainer = document.getElementById('messagesContainer')
+    messagesContainer.innerHTML =`
+        <div id="messagesContainer">
+            <table class="table">
+                <tbody id="messagesTable">
+                </table>
+            </tbody>
+        </div>
+    `
+    try {
+        
+        const html =messages
+            .map(message => {
+                return `
+                    <tr>
+                        <th scope="row">
+                            ${ message._id }
+                        </th>
+                        <td class="mail">
+                            ${ message.email }
+                        </td>
+                        <td class="date">
+                            ${ message.date }
+                        </td>
+                        <td class="message">
+                            ${ message.body }
+                        </td>
+                        <td>
+                            <button id="btnDeletedOne" onclick= "deletedOneChat('${message._id}')">
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                `
+            })
+            .join(" ")
+            const messagesTable = document.getElementById('messagesTable')
+            messagesTable.innerHTML = html
+    } catch (error) {
+        
+        messagesContainer.innerHTML = '<p> No hay mensajes para mostrar </p>'
+    }
 
 }
 const email = document.getElementById('email')
@@ -69,6 +83,7 @@ const viewChatForEmail=()=>{
     window.location.href = `/chat/ver/${email.value}`
     return false
 }
-socket.on("chat", function (messages) {
+socket.on("chat", function ({messages}) {
+    console.log(messages);
     renderMessages(messages);
 });

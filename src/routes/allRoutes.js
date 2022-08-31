@@ -4,7 +4,7 @@ import { chatRouter } from "./chat.routes.js";
 import { ecommerceRoutes } from "./frontEcomerceRoutes.js";
 import { orderRouter } from "./order.routes.js";
 import { productsRouter } from "./products.routes.js";
-import { userProfile } from "./userProfileRoutes.js";
+import { userProfile } from "./user.routes.js";
 
 
 const allRoutes = Router()

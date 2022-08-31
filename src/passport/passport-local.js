@@ -1,8 +1,7 @@
 import passport from "passport";
 import { Strategy } from "passport-local";
 import { upload } from "../container/daos/user/avatarUpload.js";
-// import { UserDaoMongoDB } from "../container/daos/user/UserDaoMongoDB.js";
-import { User } from '../container/daos/user/userModel.js'
+import { User } from '../models/User/user.model.mongo.js'
 import { connectMongoDB } from "../db/connectMongoDB.js";
 import { logger } from "../logs/log4js.js";
 import { sendEmailToAdmin } from "../messages/nodemailer.js";
@@ -47,7 +46,16 @@ passport.use(
                 newUser.email = email;
                 newUser.password = newUser.encryptPassword(password);
                 await newUser.save();
-                sendEmailToAdmin(newUser)
+                const htmlMail = `
+                <h1 style="color:greenyellow;background-color:black; text-align:center;border-radius:15px;padding:5px;">Nuevo usuario ${newUser.id} || ${newUser.name} </h1>
+                <h2>Mail del usuario: ${newUser.email}</h2>
+                <h3>Datos de: ${newUser.name}</h3>
+                <ul>
+                    <li>Teléfono: ${newUser.phone}</li>
+                    <li>Dirección: ${newUser.address}</li>
+                </ul>
+                `
+                sendEmailToAdmin({html:htmlMail,subject:'Nuevo usuario registrado'})
                 // twilioSend.sendWhatsappToAdmin(`El usuario ${name}, se registro con el email: ${email},${newUser}`)
                 done(null, newUser);
             }

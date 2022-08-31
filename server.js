@@ -27,12 +27,18 @@ io.on("connection", function (socket) {
     socket.on('newChat', ()=>{
         development ?
             axios('http://localhost:8080/chat/api')
-            .then(res=>io.sockets.emit("chat",res.data))
-            .catch(err=>console.log('Errorrrrr:',err))
+            .then(res=>io.sockets.emit("chat",{messages:res.data}))
+            .catch(err=>{
+                io.sockets.emit("chat",{messages:false})
+                // console.log('Errorrrrr:',err)
+            })
         :
             axios(`${process.env.HOST_HEROKU}/chat/api`)
-            .then(res=>io.sockets.emit("chat",res.data))
-            .catch(err=>console.log('Errorrrrr:',err))
+            .then(res=>io.sockets.emit("chat",{messages:res.data}))
+            .catch(err=>{
+                io.sockets.emit("chat",{messages:false})
+                console.log('Errorrrrr:',err)
+            })
     })
 })
 
