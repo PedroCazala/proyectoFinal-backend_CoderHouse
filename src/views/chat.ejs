@@ -60,15 +60,15 @@
                             <% } %>
                     </tbody>
                 </table>
-                <div class="viewChatForEmail">
-                    <p>Ver solo los chats de <b id="emailToView"> (Ingresa tu email arriba)</b></p>
-                    <button class="btn btn-black" type="submit" onclick="viewChatForEmail()">Mis
-                        mails</button>
-                </div>
                 <% } else{ %>
                     <div>No hay mensajes disponibles</div>
-                    <% } %>
-        </div>
+                <% } %>
+            </div>
+            <div class="viewChatForEmail">
+                <p>Ver solo los chats de <b id="emailToView"> (Ingresa tu email arriba)</b></p>
+                <button class="btn btn-black" type="submit" onclick="viewChatForEmail()">Mis
+                    mails</button>
+            </div>
         <%- include('./partials/footer'); %>
     </div>
     <script src="/socket.io/socket.io.js"></script>

@@ -4,7 +4,7 @@ import { chatRouter } from "./chat.routes.js";
 import { ecommerceRoutes } from "./frontEcomerceRoutes.js";
 import { orderRouter } from "./order.routes.js";
 import { productsRouter } from "./products.routes.js";
-import { userProfile } from "./user.routes.js";
+import { userRoutes } from "./user.routes.js";
 
 
 const allRoutes = Router()
@@ -26,8 +26,8 @@ allRoutes.use('/api/carrito',cartRouter)
 allRoutes.use('/api/ordenes',orderRouter)
 allRoutes.use('/e-commerce',ecommerceRoutes)
 
-// UserProfile login logout register
-allRoutes.use('/',userProfile)
+// UserRoutes login logout register
+allRoutes.use('/',userRoutes)
 //Rutas no encontradas
 allRoutes.get('*',(req,res)=>{
     const ruta =req.url

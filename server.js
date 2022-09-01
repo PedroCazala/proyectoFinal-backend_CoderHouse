@@ -30,7 +30,7 @@ io.on("connection", function (socket) {
             .then(res=>io.sockets.emit("chat",{messages:res.data}))
             .catch(err=>{
                 io.sockets.emit("chat",{messages:false})
-                // console.log('Errorrrrr:',err)
+                console.log('Errorrrrr:',err)
             })
         :
             axios(`${process.env.HOST_HEROKU}/chat/api`)
@@ -68,10 +68,20 @@ app.use(session({
     resave: false,
     saveUninitialized:false
 }))
+// import cookieSession from 'cookie-session'
+// app.use(cookieSession({
+//     // store: MongoStore,
+//     // secret: 'dfafasf',
+//     // resave: false,
+//     // saveUninitialized:false
+//     name:'cookies',
+//     keys:[ 'llave1','llave2']
+// }))
 // -------- PARA USAR PASSPORT -------
 app.use(passport.initialize())                              
 app.use(passport.session())
 import './src/passport/passport-local.js'
+import './src/passport/passport-jwt.js'
 
 
 //Para poder utilizar distintos modos de implementación del servidor

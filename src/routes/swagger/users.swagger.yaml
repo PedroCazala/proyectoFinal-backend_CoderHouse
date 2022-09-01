@@ -1,0 +1,75 @@
+/login:
+  get:
+    tags: [Users, Vistas]
+    summary: Inicio muestra la vista para iniciar sesión
+    responses:
+      '200':
+        description: Vista para iniciar sesión
+  post:
+    tags: [Users, Vistas]
+    summary: Inicio de sesión del User
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+                description: Email del usuario
+                example: ejemplo@ejemplo.com
+              password:
+                type: string
+                description: Contraseña del usuario
+                example: ejemplo
+    responses:
+      '200':
+        description: Te envia a '/', donde hay un menu para que el usuario navegue entre sus datos
+/logout:
+  get:
+    tags: [Users, Vistas]
+    summary: Desloguea al usuario
+    responses:
+      '200':
+        description: Usuario Deslogueado
+/register:
+  get:
+    tags: [Users, Vistas]
+    summary: Inicio muestra la vista para que un nuevo usuario se pueda registrar
+    responses:
+      '200':
+        description: Vista para que un nuevo usuario se pueda registrar
+  post:
+    tags: [Users, Vistas]
+    summary: Registro de un usuario, (IMPORTANTE => la img es un archivo que se sube)
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            $ref: '#/components/schemas/User'
+    responses:
+      '200':
+        description: Te envia a '/', donde hay un menu para que el usuario navegue entre sus datos y ademas registro al usuario
+/profile:
+  get:
+    tags: [Users]
+    summary: devuelve un json con la info del usuario
+    responses:
+      '200':
+        description: json con la info del usuario
+      '404':
+        description: Avisa que no hay sesión de usuario activa
+        example: No hay ninguna sesión de usuario activa
+/infoUser:
+  get:
+    tags: [Users]
+    summary: devuelve un json con la info del usuario (depende del token, administrado con JWT)
+    responses:
+      '200':
+        description: json con la info del usuario
+      '401':
+        description: Avisa que no hay sesión de usuario activa
+        example: Unauthorized
