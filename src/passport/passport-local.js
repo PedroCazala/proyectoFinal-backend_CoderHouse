@@ -28,7 +28,7 @@ passport.use(
         {
             usernameField: "email",
             passwordField: "password",
-            passReqToCallback: true
+            passReqToCallback: true,
         },
         async (req, email, password, done) => {
             const user = await User.findOne({email:email})
@@ -38,7 +38,7 @@ passport.use(
             }else{
                 const newUser = await new User();
                 
-                const {name,address, age, phone, img} =req.body
+                const {name,address, age, phone, img,passwordCompare} =req.body
                 newUser.name = name;
                 newUser.address = address;
                 newUser.age = age;
@@ -46,20 +46,24 @@ passport.use(
                 newUser.img = req.file.filename;
                 newUser.email = email;
                 newUser.password = newUser.encryptPassword(password);
-                await newUser.save();
-                //email to admin
-                const htmlMail = `
-                    <h1 style="color:greenyellow;background-color:black; text-align:center;border-radius:15px;padding:5px;">Nuevo usuario ${newUser.id} || ${newUser.name} </h1>
-                    <h2>Mail del usuario: ${newUser.email}</h2>
-                    <h3>Datos de: ${newUser.name}</h3>
-                    <ul>
-                        <li>Teléfono: ${newUser.phone}</li>
-                        <li>Dirección: ${newUser.address}</li>
-                    </ul>
-                `
-                sendEmailToAdmin({html:htmlMail,subject:'Nuevo usuario registrado'})
-                // twilioSend.sendWhatsappToAdmin(`El usuario ${name}, se registro con el email: ${email},${newUser}`)
-                done(null, newUser);
+                if (password == passwordCompare) {
+                    await newUser.save();
+                    //email to admin
+                    const htmlMail = `
+                        <h1 style="color:greenyellow;background-color:black; text-align:center;border-radius:15px;padding:5px;">Nuevo usuario ${newUser.id} || ${newUser.name} </h1>
+                        <h2>Mail del usuario: ${newUser.email}</h2>
+                        <h3>Datos de: ${newUser.name}</h3>
+                        <ul>
+                            <li>Teléfono: ${newUser.phone}</li>
+                            <li>Dirección: ${newUser.address}</li>
+                        </ul>
+                    `
+                    sendEmailToAdmin({html:htmlMail,subject:'Nuevo usuario registrado'})
+                    // twilioSend.sendWhatsappToAdmin(`El usuario ${name}, se registro con el email: ${email},${newUser}`)
+                    done(null, newUser);
+                }else{
+                    done('la contraseña debe escribirse igual las dos veces');
+                }
             }
         }
     )

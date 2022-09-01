@@ -66,7 +66,10 @@ app.use(session({
     // store: MongoStore,
     secret: 'dfafasf',
     resave: false,
-    saveUninitialized:false
+    saveUninitialized:false,
+    cookie: {
+        maxAge: 60 * 60 * 1000
+    }
 }))
 // import cookieSession from 'cookie-session'
 // app.use(cookieSession({
@@ -97,3 +100,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(optionsSwagge
 
 // -------- ROUTES (Debe estar al final del server) -------
 app.use('/',allRoutes)
+
+// process.on('uncaughtException', (error, source) => {
+//     logger.error(process.stderr.fd, error, source);
+// });
