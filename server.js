@@ -86,7 +86,6 @@ app.use(passport.session())
 import './src/passport/passport-local.js'
 import './src/passport/passport-jwt.js'
 
-
 //Para poder utilizar distintos modos de implementación del servidor
 import { mode } from './src/mode/mode.js'
 mode()
