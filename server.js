@@ -80,6 +80,14 @@ app.use(session({
 //     name:'cookies',
 //     keys:[ 'llave1','llave2']
 // }))
+// middleware para permitir CORS
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    next();
+  });
+  
 // -------- PARA USAR PASSPORT -------
 app.use(passport.initialize())                              
 app.use(passport.session())
