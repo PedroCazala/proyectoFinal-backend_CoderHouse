@@ -107,8 +107,10 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(optionsSwagge
 
 // -------- ROUTES (Debe estar al final del server) -------
 app.use('/',allRoutes)
-import serverless from "serverless-http";
-export const handler = serverless(app);
+
+
+// import serverless from "serverless-http";
+// export const handler = serverless(app);
 
 
 // process.on('uncaughtException', (error, source) => {
