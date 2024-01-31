@@ -5,5 +5,5 @@ firebase-key.json
 public/uploads/*
 !public/uploads/.gitkeep
 node_modules
-# dist
+dist
 firebaseKey.json
