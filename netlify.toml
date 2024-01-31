@@ -1,2 +1,3 @@
 [build]
-    functions = "functions"
+  command = "npm run build"  # Especifica el comando para construir tu proyecto
+  publish = "dist"           # Especifica la carpeta de publicación (donde se encuentra la versión construida)
